@@ -1,0 +1,11 @@
+<button class="button-container" 
+        [ngClass]="{
+           'size-large': size == 'large',
+           'size-medium': size == 'medium',
+           'size-small': size == 'small',
+           'type-flat bg-turquoise-500 text-white-beach-50': type == 'flat' && valid,
+           'type-outline text-turquoise-600': type == 'outline' && valid,
+           'type-flat-disable': type == 'flat' && !valid,
+           'type-outline-disable': type == 'outline' && !valid,
+        }" 
+        (click)="clickButton()">{{name}}</button>

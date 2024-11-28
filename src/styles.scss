@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+.w-h-full{
+    width: 100%;
+    height: 100%;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.gradient-text {
+    background: radial-gradient(circle, #00B5E2 40%, #989898 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.font-text-title-init{
+    font-size: 2.5rem;
+    font-style: italic;
+}
+
+.text-turquoise-700{
+    color: #0a6f94;
+}
+
+.text-turquoise-600{
+    color: #038ab7;
+}
+
+.text-white-beach-50{
+    color: #f4f4f4;
+}
+
+.text-white-beach-600{
+    color: #656565;
+}
+
+.text-white-beach-500{
+    color: #7c7c7c;
+}
+
+.text-white-beach-200{
+    color: #dcdcdc;
+}
+
+.bg-turquoise-50{
+    background-color: #ebfdff;
+}
+
+.bg-turquoise-100{
+    background-color: #cef8ff;
+}
+
+.bg-turquoise-200{
+    background-color: #a2f0ff;
+}
+
+.bg-turquoise-500{
+    background-color: #00b5e2;
+}

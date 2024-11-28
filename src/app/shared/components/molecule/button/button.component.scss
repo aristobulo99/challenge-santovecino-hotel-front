@@ -1,0 +1,62 @@
+.button-container{
+    width: 100%;
+    padding: 0 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    border-radius: 0.625rem;
+    font-size: 16px;
+}
+
+.size-large{
+    height: 2.875rem;
+}
+
+.size-medium{
+    height: 2.5rem;
+}
+
+.size-small{
+    height: 1.875rem;
+}
+
+.type-flat{
+    border: none;
+    cursor: pointer;
+}
+
+.type-outline{
+    background-color: white;
+    border: 1px solid #038ab7;
+    cursor: pointer;
+}
+
+.type-flat-disable{
+    border: none;
+    background-color: #cef8ff;
+    color: #1ccbf4;
+}
+
+.type-outline-disable{
+    background-color: white;
+    border: 1px solid #63e3fd;
+    color: #63e3fd;
+}
+
+.type-flat:hover{
+    background-color: #038ab7;
+}
+
+.type-flat:active{
+    background-color: #0a6f94;
+}
+
+.type-outline:hover{
+    border: 1px solid #0a6f94;
+    color: #0a6f94;
+}
+
+.type-outline:active{
+    border: 1px solid #125a78;
+    color: #125a78;
+}
+
