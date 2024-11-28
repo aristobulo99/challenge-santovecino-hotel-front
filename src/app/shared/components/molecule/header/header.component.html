@@ -6,7 +6,7 @@
     </div>
 
     <div class="button-content">
-        @for (button of buttonsToggle; track $index) {
+        @for (button of getbuttonsToggle(); track $index) {
             <app-button-toggle [title]="button.title" 
                                [selectd]="button.selectd" 
                                (clickEvent)="clickButton(button.url)"></app-button-toggle>

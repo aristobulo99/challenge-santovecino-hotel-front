@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ButtonToggle } from '../../../shared/components/molecule/header/header.component';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,18 @@ import { Injectable } from '@angular/core';
 export class HeaderService {
 
   private _visibleHeader: boolean = false;
+  private _buttonsToggle: ButtonToggle[] = [
+    {
+      title: 'Disponibilidad',
+      selectd: false,
+      url: '/availability'
+    },
+    {
+      title: 'Mis Reservas',
+      selectd: false,
+      url: '/home'
+    }    
+  ]
 
   constructor() { }
 
@@ -15,5 +28,13 @@ export class HeaderService {
 
   set visibleHeader(value: boolean){
     this._visibleHeader = value;
+  }
+
+  get buttonsToggle(){
+    return this._buttonsToggle;
+  }
+
+  set buttonsToggle(value: ButtonToggle[]){
+    this._buttonsToggle = value;
   }
 }
