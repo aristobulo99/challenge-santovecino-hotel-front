@@ -1,0 +1,40 @@
+.header-content{
+    width: 100%;
+    height: 4rem;
+    border-radius: 1.25rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-title{
+    width: 8.75rem;
+    height: 2.875rem;
+    border-radius: 0.938rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    margin-left: 1.5rem;
+    cursor: pointer;
+}
+
+.icon-title:hover{
+    background-color: #a2f0ff;
+}
+
+.icon-content{
+    width: 1.5rem; 
+    height: 1.5rem;
+}
+
+.button-content{
+    height: 2.875rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem;
+    margin-right: 1.5rem;
+}

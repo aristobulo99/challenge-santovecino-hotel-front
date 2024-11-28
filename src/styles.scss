@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 .w-h-full{
-    width: 100%;
     height: 100%;
 }
 
@@ -18,6 +17,11 @@ body{
 .font-text-title-init{
     font-size: 2.5rem;
     font-style: italic;
+    margin: 0;
+}
+
+.font-text-14{
+    font-size: 0.875rem;
     margin: 0;
 }
 
@@ -59,4 +63,12 @@ body{
 
 .bg-turquoise-500{
     background-color: #00b5e2;
+}
+
+.bg-white-beach-200{
+    background-color: #dcdcdc;
+}
+
+.shadow-lg{
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }

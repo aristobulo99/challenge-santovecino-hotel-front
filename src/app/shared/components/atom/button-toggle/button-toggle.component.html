@@ -1,0 +1,8 @@
+<div class="button-content" 
+     [ngClass]="{
+        'bg-turquoise-50': !selectd,
+        'bg-turquoise-200': selectd
+     }"
+     (click)="clickButton()">
+    <p class="text-turquoise-700 font-text-14">{{title}}</p>
+</div>

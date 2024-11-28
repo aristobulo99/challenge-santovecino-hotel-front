@@ -1,0 +1,30 @@
+.section-button {
+    height: 2.875rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.button-content{
+    height: 2.875rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.938rem;
+    padding: 0 0.625rem;
+    cursor: pointer;
+}
+
+.button-content:hover{
+    background-color: #cef8ff;
+}
+
+.button-content:active{
+    background-color: #a2f0ff;
+}
+
+p{
+    font-weight: 700;
+}
+
