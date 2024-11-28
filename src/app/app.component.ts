@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ButtonComponent } from './shared/components/atom/button/button.component';
+import { CircularCardComponent } from './shared/components/atom/circular-card/circular-card.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonComponent],
+  imports: [RouterOutlet, CircularCardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
