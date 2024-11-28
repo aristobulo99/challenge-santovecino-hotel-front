@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/molecule/header/header.component';
+import { HeaderService } from './core/services/header/header.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,12 @@ import { HeaderComponent } from './shared/components/molecule/header/header.comp
 })
 export class AppComponent {
   title = 'challenge-santovecino-hotel';
+
+  constructor(
+    private headerService: HeaderService,
+  ){}
+
+  getVisibleHeader(): boolean{
+    return this.headerService.visibleHeader;
+  }
 }

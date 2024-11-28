@@ -3,15 +3,18 @@ import { HomeComponent } from './pages/home/home.component';
 import { NgModel } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AvailabilityComponent } from './pages/availability/availability.component';
+import { headerControlGuard } from './core/guard/header-control/header-control.guard';
 
 export const routes: Routes = [
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [headerControlGuard]
     },
     {
         path: 'availability',
-        component: AvailabilityComponent
+        component: AvailabilityComponent,
+        canActivate: [headerControlGuard]
     },
     {
         path:'**',
