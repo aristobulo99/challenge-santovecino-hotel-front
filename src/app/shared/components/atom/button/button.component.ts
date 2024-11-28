@@ -12,7 +12,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ButtonComponent {
 
-  @Input() name!: String; // nombre asignado al boton
+  @Input() name!: String; // Nombre asignado al boton
   @Input() size: 'large' | 'medium' | 'small' = 'large'; // control la altura del boton;
   @Input() type: 'flat' | 'outline' = 'flat'; //Control el color del boton
   @Input() valid: boolean = true; //Control si el boton esta activo
