@@ -5,7 +5,7 @@ import { CircularCardComponent } from './shared/components/atom/circular-card/ci
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CircularCardComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
