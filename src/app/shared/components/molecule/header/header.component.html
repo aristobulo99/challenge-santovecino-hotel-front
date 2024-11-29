@@ -1,15 +1,17 @@
-<header class="bg-turquoise-50 header-content shadow-lg">
-    <div class="icon-title" (click)="clickButton('/home')">
-        <app-icon class="icon-content" [name]="'room-service'"></app-icon>
-
-        <h1 class="font-text-14 text-turquoise-700">Hotel Cancún</h1>
-    </div>
-
-    <div class="button-content">
-        @for (button of getbuttonsToggle(); track $index) {
-            <app-button-toggle [title]="button.title" 
-                               [selectd]="button.selectd" 
-                               (clickEvent)="clickButton(button.url)"></app-button-toggle>
-        }
-    </div>
-</header>
+<section class="header-section">
+    <header class="bg-turquoise-50 header-content shadow-lg">
+        <div class="icon-title" (click)="clickButton('/home')">
+            <app-icon class="icon-content" [name]="'room-service'"></app-icon>
+    
+            <h1 class="font-text-14 text-turquoise-700">Hotel Cancún</h1>
+        </div>
+    
+        <div class="button-content">
+            @for (button of getbuttonsToggle(); track $index) {
+                <app-button-toggle [title]="button.title" 
+                                   [selectd]="button.selectd" 
+                                   (clickEvent)="clickButton(button.url)"></app-button-toggle>
+            }
+        </div>
+    </header>
+</section>

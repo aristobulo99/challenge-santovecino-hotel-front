@@ -1,1 +1,22 @@
-<p>availability works!</p>
+<section class="full section-availa" >
+    <div class="room-content">
+        <app-simple-card class="card-simple-content" 
+                         [content]="roomTemplate"></app-simple-card>
+    </div>
+
+    <app-simple-card class="reservation-content" [content]="reservationTemplate"></app-simple-card>
+</section>
+
+<ng-template #roomTemplate>
+    <div class="full">
+        <h1 style="margin: 0;">Hola mundo!!!!</h1>
+
+    </div>
+</ng-template>
+
+
+<ng-template #reservationTemplate>
+    <div class="full">
+        <h1 style="margin: 0;">Hola mundo!!!!</h1>
+    </div>
+</ng-template>

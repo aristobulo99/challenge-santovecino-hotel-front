@@ -1,0 +1,7 @@
+<section class="full card-content" 
+         [ngClass]="{
+            'bg-white card-simple': type == 'simple',
+            'bg-turquoise-100 card-turquoise': type == 'turquoise'
+         }">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+</section>
