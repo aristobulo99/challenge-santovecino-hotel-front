@@ -13,9 +13,13 @@ body{
     margin: 0;
 }
 
+.loading-text{
+    top: 50% !important;
+}
+
 .gradient-text {
     background: radial-gradient(circle, #00B5E2 40%, #989898 100%);
-    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 

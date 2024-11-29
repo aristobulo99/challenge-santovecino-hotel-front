@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { Router } from '@angular/router';
+import { LoadingService } from '../../../../core/services/loading/loading.service';
 
 @Component({
   selector: 'app-circular-card',
@@ -14,11 +15,18 @@ export class CircularCardComponent {
   @Input() title!: string;
   
   constructor(
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService
   ){}
 
   goAvailability(){
-    this.router.navigate(['/availability'])
+    this.loadingService.spinnerShow();
+    setTimeout(
+      () => {
+        this.router.navigate(['/availability']);
+        this.loadingService.spinnerHide();
+      }, 1500
+    )
   }
 
 }
