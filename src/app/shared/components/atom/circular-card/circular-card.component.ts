@@ -21,12 +21,7 @@ export class CircularCardComponent {
 
   goAvailability(){
     this.loadingService.spinnerShow();
-    setTimeout(
-      () => {
-        this.router.navigate(['/availability']);
-        this.loadingService.spinnerHide();
-      }, 1500
-    )
+    this.router.navigate(['/availability']);
   }
 
 }

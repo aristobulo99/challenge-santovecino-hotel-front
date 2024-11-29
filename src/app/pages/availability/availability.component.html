@@ -1,8 +1,15 @@
 <section class="section-availa" >
-    <div class="room-content">
-        <app-simple-card class="card-simple-content" 
-                         [content]="roomTemplate"></app-simple-card>
+    <div style="overflow-x: hidden; padding-right: 0.875rem; margin-right: 0.625rem;">
+        <div class="room-content">
+            @if (loadingCard) { 
+                <app-loading-card [numberCards]="2"></app-loading-card>
+            }@else {
+                <app-simple-card class="card-simple-content" 
+                                 [content]="roomTemplate"></app-simple-card>
+            }
+        </div>
     </div>
+    
 
     <app-simple-card class="reservation-content" [content]="reservationTemplate"></app-simple-card>
 </section>
