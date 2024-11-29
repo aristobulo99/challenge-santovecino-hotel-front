@@ -1,0 +1,30 @@
+<app-simple-card style="display: flex; height: 16.563rem;" [content]="roomTemplate" [paddingSize]="'large'"></app-simple-card>
+
+<ng-template #roomTemplate>
+    <section class="full room-card-section">
+        <img class="room-img" [src]="dataRoom.image" alt="image of the room">
+
+        <div class="room-div">
+            <p class="font-text-18 text-turquoise-700">{{dataRoom.name}}</p>
+
+            <div class="room-ability">
+                <app-icon class="w-h-24" [name]="'persons'"></app-icon>
+
+                <p class="font-text-14 text-turquoise-700">Capacidad para {{dataRoom.ability}} {{dataRoom.ability > 1 ? 'huéspedes' : 'huésped'}}</p>
+            </div>
+
+            <p class="font-text-14 text-turquoise-700 room-descrip">{{dataRoom.description}}</p>
+
+            <div class="room-state">
+                @if (dataRoom.state) {
+                    <app-button [name]="'Reservar'" 
+                                [size]="'small'" 
+                                [type]="'outline'" 
+                                [valid]="dataRoom.state"></app-button>
+                }@else {
+                    <p class="text-white-beach-600 font-text-16 room-text-state">No Disponible</p>
+                }
+            </div>
+        </div>
+    </section>
+</ng-template>

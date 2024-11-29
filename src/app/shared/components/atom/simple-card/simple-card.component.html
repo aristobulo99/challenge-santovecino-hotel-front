@@ -1,7 +1,9 @@
 <section class="full card-content" 
          [ngClass]="{
             'bg-white card-simple': type == 'simple',
-            'bg-turquoise-100 card-turquoise': type == 'turquoise'
+            'bg-turquoise-100 card-turquoise': type == 'turquoise',
+            'card-p-20': paddingSize == 'large',
+            'card-p-10': paddingSize == 'small',
          }">
     <ng-container *ngTemplateOutlet="content"></ng-container>
 </section>

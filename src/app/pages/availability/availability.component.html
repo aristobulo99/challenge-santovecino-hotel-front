@@ -4,8 +4,9 @@
             @if (loadingCard) { 
                 <app-loading-card [numberCards]="2"></app-loading-card>
             }@else {
-                <app-simple-card class="card-simple-content" 
-                                 [content]="roomTemplate"></app-simple-card>
+                @for (room of dataRoom; track $index) {
+                    <app-room-card class="w-full m-b-10" [dataRoom]="room"></app-room-card>
+                }
             }
         </div>
     </div>
@@ -14,12 +15,7 @@
     <app-simple-card class="reservation-content" [content]="reservationTemplate"></app-simple-card>
 </section>
 
-<ng-template #roomTemplate>
-    <div class="full">
-        <h1 style="margin: 0;">Hola mundo!!!!</h1>
 
-    </div>
-</ng-template>
 
 
 <ng-template #reservationTemplate>

@@ -1,5 +1,4 @@
 .card-content{
-    padding: 0.625rem;
     box-sizing: border-box;
 }
 
@@ -10,4 +9,12 @@
 .card-turquoise{
     border-radius: 0.313rem;
     border-left: 0.313rem solid #038AB7 ;
+}
+
+.card-p-10{
+    padding: 0.625rem;
+}
+
+.card-p-20{
+    padding: 1.25rem;
 }

@@ -1,0 +1,62 @@
+.room-card-section{
+    display: flex;
+    flex-direction: row;
+    gap: 1.25rem;
+}
+
+.room-img{
+    width: 21.063rem;
+    height: 14.063rem;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 1.25rem;
+}
+
+.room-div{
+    width: 37.688rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    overflow: hidden;
+}
+
+.room-ability{
+    width: 100%;
+    height: 1.875rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.625rem;
+    border-bottom: 1px solid #DCDCDC;
+
+    p{
+        font-weight: 300;
+    }
+}
+
+.room-descrip{
+    width: 100%;
+    height: 8.125rem;
+    text-align: justify;
+    margin-top: 0.25rem;
+    white-space: pre-wrap;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+
+.room-state{
+    width: 100%;
+    height: 1.875rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.room-text-state{
+    width: 6.438rem;
+    font-weight: 900;
+    line-height: 1.188rem;
+}

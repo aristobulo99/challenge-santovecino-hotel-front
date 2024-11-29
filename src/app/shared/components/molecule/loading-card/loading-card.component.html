@@ -1,6 +1,6 @@
 <div class="full loading-content" >
     @for (item of [].constructor(numberCards); track $index) {
-        <app-simple-card class="loading-simple-card" [content]="loadingCard"></app-simple-card>
+        <app-simple-card class="loading-simple-card" [content]="loadingCard" [paddingSize]="'large'"></app-simple-card>
     }
 </div>
 

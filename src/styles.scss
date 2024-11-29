@@ -3,9 +3,17 @@
     height: 100%;
 }
 
+.w-full{
+    width: 100%;
+}
+
 .full{
     width: 100%;
     height: 100%;
+}
+
+.m-b-10{
+    margin-bottom: 0.625rem;
 }
 
 body{
@@ -31,6 +39,17 @@ body{
 
 .font-text-14{
     font-size: 0.875rem;
+    margin: 0;
+}
+
+.font-text-16{
+    font-size: 1rem;
+    margin: 0;
+}
+
+.font-text-18{
+    font-size:1.125rem;
+    font-weight: 900;
     margin: 0;
 }
 
@@ -84,4 +103,9 @@ body{
 
 .shadow-lg{
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.w-h-24{
+    width: 1.5rem;
+    height: 1.5rem;
 }

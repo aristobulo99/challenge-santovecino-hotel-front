@@ -15,5 +15,6 @@ export class SimpleCardComponent {
 
   @Input() type: 'simple' | 'turquoise' = 'simple';
   @Input() content!: TemplateRef<any>;
+  @Input() paddingSize: 'large' | 'small' = 'small'
 
 }
