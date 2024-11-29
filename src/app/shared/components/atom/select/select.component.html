@@ -1,11 +1,11 @@
 <form class="example-form">
     <mat-form-field class="example-full-width">
         <mat-label class="text-white-beach-500 font-text-16">{{label}}</mat-label>
-        <select matNativeControl required class="select" [formControl]="control">
+        <mat-select matNativeControl required class="select" [formControl]="control">
           @for (option of options; track option) {
-            <option [value]="option.valueId">{{option.option}}</option>
+            <mat-option [value]="option.valueId">{{option.option}}</mat-option>
           }
-        </select>
+        </mat-select>
         @if (control.hasError('required')) {
           <mat-error class="text-red-500 font-text-12">El campo {{label}} es <strong>requerido.</strong></mat-error>
         }

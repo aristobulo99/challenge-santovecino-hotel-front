@@ -9,6 +9,10 @@
     height: 100%;
 }
 
-.select{
+.input{
     color: #063146 !important;
+}
+
+.input::placeholder{
+    color: #7C7C7C !important;
 }
