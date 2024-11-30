@@ -16,7 +16,7 @@ export class HeaderService {
     {
       title: 'Mis Reservas',
       selectd: false,
-      url: '/home'
+      url: '/my-reservations'
     }    
   ]
 

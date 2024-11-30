@@ -60,3 +60,16 @@
     color: #125a78;
 }
 
+.w-h-24 {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.icon-name-content{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center;
+    gap: 0.625rem;
+}
+

@@ -1,1 +1,13 @@
-<p>my-reservations works!</p>
+<section class="my-reserv-section">
+    @if (existingGuest) {
+
+    }@else {
+        <div [ngTemplateOutlet]="reservSearchFormTemplete"></div>
+    }
+
+
+</section>
+
+<ng-template #reservSearchFormTemplete>
+    <app-reservation-search-form (searchDocumentEvent)="searchDocument($event)"></app-reservation-search-form>
+</ng-template>

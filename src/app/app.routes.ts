@@ -4,6 +4,7 @@ import { NgModel } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AvailabilityComponent } from './pages/availability/availability.component';
 import { headerControlGuard } from './core/guard/header-control/header-control.guard';
+import { MyReservationsComponent } from './pages/my-reservations/my-reservations.component';
 
 export const routes: Routes = [
     {
@@ -14,6 +15,11 @@ export const routes: Routes = [
     {
         path: 'availability',
         component: AvailabilityComponent,
+        canActivate: [headerControlGuard]
+    },
+    {
+        path: 'my-reservations',
+        component: MyReservationsComponent,
         canActivate: [headerControlGuard]
     },
     {

@@ -1,21 +1,24 @@
 import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'app-button',
   standalone: true,
   imports: [
-    NgClass
+    NgClass,
+    IconComponent
   ],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
 
-  @Input() name!: String; // Nombre asignado al boton
-  @Input() size: 'large' | 'medium' | 'small' = 'large'; // control la altura del boton;
-  @Input() type: 'flat' | 'outline' = 'flat'; //Control el color del boton
-  @Input() valid: boolean = true; //Control si el boton esta activo
+  @Input() name!: String;
+  @Input() size: 'large' | 'medium' | 'small' = 'large';
+  @Input() type: 'flat' | 'outline' = 'flat';
+  @Input() valid: boolean = true;
+  @Input() icon!: string;
 
   @Output() clickEvent: EventEmitter<void> = new EventEmitter();
 

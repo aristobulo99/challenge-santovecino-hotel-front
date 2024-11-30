@@ -1,0 +1,29 @@
+<app-simple-card class="reserv-search-card" [content]="formSearchTempplate"></app-simple-card>
+
+<ng-template #formSearchTempplate>
+    <section class="w-full reserv-search-section">
+        <h1 class="font-text-18 text-turquoise-700">Buscar reservas de habitaciones</h1>
+
+        <p class="font-text-16 text-turquoise-700">Ingrese su número de documento para verificar sus reservas de habitaciones.</p>
+
+        <div class="reserv-search-div">
+
+            <app-input class="w-full" 
+                       [type]="'number'" 
+                       [label]="'Documento'" 
+                       [placeholder]="'Ej: 123456789'" 
+                       [minlength]="minLengthNumber"
+                       [maxlength]="maxLengthNumber"
+                       [control]="inputDocument"></app-input>
+
+            <app-button [name]="'Buscar'" 
+                        [icon]="'search'"  
+                        [size]="'medium'"
+                        [valid]="inputDocument.valid" 
+                        (clickEvent)="searchDocument()"></app-button>
+
+        </div>
+
+    </section>
+
+</ng-template>

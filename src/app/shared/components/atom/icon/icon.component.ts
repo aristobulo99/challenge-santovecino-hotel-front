@@ -10,5 +10,6 @@ import { Component, Input } from '@angular/core';
 export class IconComponent {
 
   @Input() name!: string;
+  @Input() solid: boolean = false;
 
 }

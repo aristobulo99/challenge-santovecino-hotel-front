@@ -1,4 +1,4 @@
-<button class="button-container" 
+<button class="button-container" [disabled]="!valid"
         [ngClass]="{
            'size-large': size == 'large',
            'size-medium': size == 'medium',
@@ -8,4 +8,11 @@
            'type-flat-disable': type == 'flat' && !valid,
            'type-outline-disable': type == 'outline' && !valid,
         }" 
-        (click)="clickButton()">{{name}}</button>
+        (click)="clickButton()">
+        <div class="icon-name-content">
+            @if (icon) {
+               <app-icon class="w-h-24" [name]="icon" [solid]="!valid"></app-icon>
+            }
+            {{name}}
+        </div>
+</button>
