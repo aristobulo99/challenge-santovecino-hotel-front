@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SimpleCardComponent } from '../../atom/simple-card/simple-card.component';
 import { SelectComponent, SelectionOption } from '../../atom/select/select.component';
-import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { DatePickerComponent } from '../../molecule/date-picker/date-picker.component';
 import { InputComponent } from '../../atom/input/input.component';
 import { ButtonComponent } from '../../atom/button/button.component';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';

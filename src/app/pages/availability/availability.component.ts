@@ -5,7 +5,7 @@ import { LoadingService } from '../../core/services/loading/loading.service';
 import { RoomCardComponent } from '../../shared/components/molecule/room-card/room-card.component';
 import { Room } from '../../core/interfaces/room.interfaces';
 import { getRoomList } from '../../core/mocks/room.mock';
-import { ReservationFormComponent } from '../../shared/components/molecule/reservation-form/reservation-form.component';
+import { ReservationFormComponent } from '../../shared/components/organism/reservation-form/reservation-form.component';
 import { TableComponent } from '../../shared/components/molecule/table/table.component';
 import { DataSource } from '../../core/interfaces/table.interfaces';
 import { getDataSource } from '../../core/mocks/table.mocks';
