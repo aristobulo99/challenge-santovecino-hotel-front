@@ -3,45 +3,55 @@
 <ng-template #tableTemplate>
     <h1 class="font-text-18 text-turquoise-700">RESERVAS</h1>
 
-    <table class="w-full mt-20 table-content" mat-table [dataSource]="data">
-        @for (key of displayedColumns; track $index) {
-            @switch (key) {
-                @case ('actions') {
-                    <ng-container [matColumnDef]="key" stickyEnd>
-                        <th class="font-text-14 text-white-beach-500 font-w-500" mat-header-cell *matHeaderCellDef aria-label="row actions">Opciones</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div class="full action-content">
-                                @for (actionItem of element[key]; track $index) {
-                                    <app-button class="w-89" 
-                                                [name]="actionItem.title" 
-                                                [size]="actionItem.size"  
-                                                [type]="actionItem.type"></app-button>
+    <section class="example-container">
+        <table class="w-full table-content" mat-table [dataSource]="data">
+            @for (key of displayedColumns; track $index) {
+                @switch (key) {
+                    @case ('actions') {
+                        <ng-container [matColumnDef]="key" stickyEnd>
+                            <th class="font-text-14 text-white-beach-500 font-w-500" mat-header-cell *matHeaderCellDef aria-label="row actions">Opciones</th>
+                            <td mat-cell *matCellDef="let element">
+                                <div class="full action-content">
+                                    @for (actionItem of element[key]; track $index) {
+                                        <app-button class="w-89" 
+                                                    [name]="actionItem.title" 
+                                                    [size]="actionItem.size"  
+                                                    [type]="actionItem.type"></app-button>
+                                    }
+                                </div>
+                            </td>
+                        </ng-container>
+                    }
+                    @default {
+                        <ng-container [matColumnDef]="key">
+                            <th class="font-text-14 text-white-beach-500 font-w-500" mat-header-cell *matHeaderCellDef>{{key}}</th>
+                            <td class="font-text-14 font-w-300" [ngClass]="{
+                                'text-turquoise-700': element['state'],
+                                'text-white-beach-500': !element['state'],
+                            }" mat-cell *matCellDef="let element">
+                                @if (typeOfDate(element[key])) {
+                                    {{element[key] | dateFormat:'DD/MM/YYYY'}}
+                                }@else {
+                                    {{element[key]}}
                                 }
-                            </div>
-                        </td>
-                    </ng-container>
-                }
-                @default {
-                    <ng-container [matColumnDef]="key">
-                        <th class="font-text-14 text-white-beach-500 font-w-500" mat-header-cell *matHeaderCellDef>{{key}}</th>
-                        <td class="font-text-14 font-w-300" [ngClass]="{
-                            'text-turquoise-700': element['state'],
-                            'text-white-beach-500': !element['state'],
-                        }" mat-cell *matCellDef="let element">
-                            @if (typeOfDate(element[key])) {
-                                {{element[key] | dateFormat:'DD/MM/YYYY'}}
-                            }@else {
-                                {{element[key]}}
-                            }
-                        </td>
-                    </ng-container>
+                            </td>
+                        </ng-container>
+                    }
                 }
             }
-        }
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{
-            'row-content-confir': row['state'],
-            'row-content-cancel': !row['state']
-        }"></tr>
-    </table>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    
+            @if (data.length == 0) {
+                <tr class="action-content" *matNoDataRow>
+                    <td class="text-turquoise-950 font-text-14 font-w-500" colspan="4">No se encontraron reservaciones.</td>
+                </tr>
+            }
+    
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{
+                'row-content-confir': row['state'],
+                'row-content-cancel': !row['state']
+            }"></tr>
+        </table>
+    </section>
+
 </ng-template>

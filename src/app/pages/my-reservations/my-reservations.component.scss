@@ -8,3 +8,12 @@
     padding: 0.875rem 0.625rem 1.5rem 0.625rem;
     box-sizing: border-box;
 }
+
+.user-reservation{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1.5rem;
+}

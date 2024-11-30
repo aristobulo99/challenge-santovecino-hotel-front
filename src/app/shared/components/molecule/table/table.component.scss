@@ -2,9 +2,15 @@
     width: 5.563rem;
 }
 
+.example-container {
+    height: 33rem;
+    overflow: auto;
+  }
+
 .w-982{
     display: flex;
     width: 61.375rem;
+    max-height: 36.75rem;
 }
 
 .mt-20{

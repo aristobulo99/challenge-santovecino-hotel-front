@@ -1,17 +1,23 @@
 import { Component } from '@angular/core';
 import { ReservationSearchFormComponent } from '../../shared/components/organism/reservation-search-form/reservation-search-form.component';
 import { NgTemplateOutlet } from '@angular/common';
-import { MyReservation } from '../../core/interfaces/reservation.interfaces';
+import { MyReservation, RoomReservation } from '../../core/interfaces/reservation.interfaces';
 import { getUsers } from '../../core/mocks/user.mock';
 import { getRoomReservation } from '../../core/mocks/reservation.mock';
 import { LoadingService } from '../../core/services/loading/loading.service';
+import { UserDescriptionComponent } from '../../shared/components/molecule/user-description/user-description.component';
+import { DataSource } from '../../core/interfaces/table.interfaces';
+import { DateFormatPipe } from '../../shared/pipe/date-format/date-format.pipe';
+import { TableComponent } from '../../shared/components/molecule/table/table.component';
 
 @Component({
   selector: 'app-my-reservations',
   standalone: true,
   imports: [
     ReservationSearchFormComponent,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    UserDescriptionComponent,
+    TableComponent
   ],
   templateUrl: './my-reservations.component.html',
   styleUrl: './my-reservations.component.scss'
@@ -20,24 +26,45 @@ export class MyReservationsComponent {
 
   public existingGuest: boolean = false;
   public reservation!: MyReservation;
+  public data: DataSource[] = [];
+  public displayedColumns: string[] = ['Habitación', 'Fecha', 'Estado', 'actions'];
+
 
   constructor(
     private loadingService: LoadingService
   ){}
 
-  searchDocument(document: number){
+  async searchDocument(document: number){
     console.log(`Documento -> ${document}`);
     this.loadingService.spinnerShow();
     setTimeout(
-      () => {
+      async () => {
         this.reservation = {
           user: getUsers()[0],
-          roomReservation: getRoomReservation(5)
+          roomReservation: getRoomReservation(15)
         }
+        this.data = await this.mapReservationToDatasource(this.reservation.roomReservation);
         this.existingGuest = true;
         this.loadingService.spinnerHide();
       }, 1500
     )
+  }
+
+  async mapReservationToDatasource(roomReservation: RoomReservation[]): Promise<DataSource[]> {
+    const dataForm: DateFormatPipe = new DateFormatPipe();
+    return new Promise<DataSource[]>((resolve, reject) => {
+      const dataSource: DataSource[] = roomReservation.map<DataSource>(rr => (
+        {
+          'id': rr.room.id,
+          'state': rr.room.state,
+          'Habitación': rr.room.name,
+          'Fecha': `${dataForm.transform(rr.startDate, "DD/MM/YYYY") } - ${dataForm.transform(rr.endDate, "DD/MM/YYYY") }`,
+          'Estado': rr.room.state ? 'Confirmado' : 'Cancelado',
+          'actions': rr.room.state ?  [{title:'Cancelar', type: 'outline', size:"small"}, {title:'Modificar', type: 'flat', size:"small"}] : []
+        }
+      ));
+      resolve(dataSource);
+    });
   }
 
 }
