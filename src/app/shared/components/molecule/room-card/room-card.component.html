@@ -17,10 +17,7 @@
 
             <div class="room-state">
                 @if (dataRoom.state) {
-                    <app-button [name]="'Reservar'" 
-                                [size]="'small'" 
-                                [type]="'outline'" 
-                                [valid]="dataRoom.state"></app-button>
+                    <p class="text-turquoise-600 font-text-16 room-text-state">Disponible</p>
                 }@else {
                     <p class="text-white-beach-600 font-text-16 room-text-state">No Disponible</p>
                 }

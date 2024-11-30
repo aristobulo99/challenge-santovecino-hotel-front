@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { SimpleCardComponent } from '../../atom/simple-card/simple-card.component';
 import { SelectComponent, SelectionOption } from '../../atom/select/select.component';
 import { DatePickerComponent } from '../../molecule/date-picker/date-picker.component';
@@ -22,7 +22,7 @@ import { Room } from '../../../../core/interfaces/room.interfaces';
   templateUrl: './reservation-form.component.html',
   styleUrl: './reservation-form.component.scss'
 })
-export class ReservationFormComponent implements OnInit {
+export class ReservationFormComponent implements OnInit, OnChanges {
 
   @Input() dataRoom: Room[] = [];
 
@@ -117,10 +117,16 @@ export class ReservationFormComponent implements OnInit {
     private fb: FormBuilder
   ){}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['dataRoom']){
+      this.formGroupSection[0].input[0].options = this.dataRoom.map<SelectionOption>(
+        dr => ({valueId: dr.id, option: `${dr.name} - Capacidad para ${dr.ability} ${dr.ability > 1 ? 'huéspedes': 'huésped'}`})
+      );
+    }
+  }
+
   ngOnInit(): void {
-    this.formGroupSection[0].input[0].options = this.dataRoom.map<SelectionOption>(dr => ({valueId: dr.id, option: `${dr.name} - Capacidad para ${dr.ability} ${dr.ability > 1 ? 'huéspedes': 'huésped'}`}))
     this.initFormReservation();
-    console.log()
   }
 
   initFormReservation(){

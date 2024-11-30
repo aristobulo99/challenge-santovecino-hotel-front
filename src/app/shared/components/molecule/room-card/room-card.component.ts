@@ -9,8 +9,7 @@ import { ButtonComponent } from '../../atom/button/button.component';
   standalone: true,
   imports: [
     SimpleCardComponent,
-    IconComponent,
-    ButtonComponent
+    IconComponent
   ],
   templateUrl: './room-card.component.html',
   styleUrl: './room-card.component.scss'
