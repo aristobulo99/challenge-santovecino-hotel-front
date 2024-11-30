@@ -1,0 +1,41 @@
+.w-89{
+    width: 5.563rem;
+}
+
+.w-982{
+    display: flex;
+    width: 61.375rem;
+}
+
+.mt-20{
+    margin-top: 1.25rem;
+}
+
+.table-content{
+    border-spacing: 0rem 0.625rem;
+    table-layout: auto;
+}
+
+.font-w-500{
+    font-weight: 500;
+}
+
+.font-w-300{
+    font-weight: 300;
+}
+
+.action-content{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: flex-start; 
+    align-items: center; 
+    gap: 0.625rem;
+}
+
+.row-content-confir{
+    background-color: #ebfdff;
+}
+
+.row-content-cancel{
+    background-color: #DCDCDC;
+}
