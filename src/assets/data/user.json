@@ -1,3 +1,20 @@
 {
-    "users": []
+  "users": [
+    {
+      "id": "5d2b",
+      "document": "1122679774",
+      "name": "Junior",
+      "lastName": "Briceño",
+      "email": "junior@gmail.com",
+      "phone": "3222646655"
+    },
+    {
+      "id": "e292",
+      "document": "123456",
+      "name": "Juan",
+      "lastName": "Jose",
+      "email": "JJOSE@gmail.com",
+      "phone": "654874963"
+    }
+  ]
 }

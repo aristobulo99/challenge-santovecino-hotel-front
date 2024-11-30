@@ -7,8 +7,9 @@ export function getUsers(iteration: number = 1): User[] {
     for(let i = 0; i < iteration; i++){
         users.push(
             {
-                id: faker.number.int({min: 1, max:100}),
-                name: faker.person.fullName(),
+                id: ''+faker.number.int({min: 1, max:100}),
+                name: faker.person.firstName(),
+                lastName: faker.person.middleName() ,
                 document: faker.number.int({min: 999999, max:100000000}),
                 email: faker.internet.email(),
                 phone: faker.phone.number()

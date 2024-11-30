@@ -1,3 +1,53 @@
 {
-    "reservation": []
+  "reservation": [
+    {
+      "id": "176f",
+      "startDate": "2024-12-01T05:00:00.000Z",
+      "endDate": "2024-12-04T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "5d2b"
+    },
+    {
+      "id": "6cfc",
+      "startDate": "2024-12-04T05:00:00.000Z",
+      "endDate": "2024-12-07T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "5d2b"
+    },
+    {
+      "id": "218f",
+      "startDate": "2024-12-23T05:00:00.000Z",
+      "endDate": "2024-12-25T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "5d2b"
+    },
+    {
+      "id": "a885",
+      "startDate": "2024-12-07T05:00:00.000Z",
+      "endDate": "2024-12-08T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "e292"
+    },
+    {
+      "id": "3823",
+      "startDate": "2024-12-28T05:00:00.000Z",
+      "endDate": "2024-12-31T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "e292"
+    },
+    {
+      "id": "547b",
+      "startDate": "2024-12-12T05:00:00.000Z",
+      "endDate": "2024-12-15T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "5d2b"
+    },
+    {
+      "id": "8f0b",
+      "startDate": "2024-12-11T05:00:00.000Z",
+      "endDate": "2024-12-12T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "e292"
+    }
+  ]
 }

@@ -27,6 +27,18 @@ export class DatePickerComponent implements OnInit {
 
   @Input() label!: string;
   @Input() control!: FormGroup;
+  @Input() blockedDates: Date[] = [];
+
+  // Función para deshabilitar fechas, el some revisa si la fecha no está en la lista de bloqueadas
+  dateFilter = (date: Date | null): boolean => {
+    const currentDate = date || new Date();
+    return !this.blockedDates.some(
+      blockedDate =>
+        blockedDate.getFullYear() === currentDate.getFullYear() &&
+        blockedDate.getMonth() === currentDate.getMonth() &&
+        blockedDate.getDate() === currentDate.getDate()
+    );
+  };
 
   public minDate!: Date;
   public maxDate!: Date;
@@ -96,6 +108,4 @@ export class DatePickerComponent implements OnInit {
   getInvalidRange(): boolean {
     return this.control.hasError('invalidRange');
   }
-
-
 }

@@ -7,6 +7,11 @@ import { ButtonComponent } from '../../atom/button/button.component';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormControlPipe } from '../../../pipe/form-control/form-control.pipe';
 import { Room } from '../../../../core/interfaces/room.interfaces';
+import { CreateUser, User } from '../../../../core/interfaces/users.interfaces';
+import { UserService } from '../../../../core/services/user/user.service';
+import { LoadingService } from '../../../../core/services/loading/loading.service';
+import { CreateReservation } from '../../../../core/interfaces/reservation.interfaces';
+import { ReservationService } from '../../../../core/services/reservation/reservation.service';
 
 @Component({
   selector: 'app-reservation-form',
@@ -30,6 +35,7 @@ export class ReservationFormComponent implements OnInit, OnChanges {
   public minLengthString: number = 2;
   public maxLengthNumber: number = 12;
   public maxLengthString: number = 50;
+  public blockedDates: Date[] = [];
   public formReservation: FormGroup = new FormGroup({});
   public controlDate: FormGroup = new FormGroup(
     {
@@ -114,7 +120,10 @@ export class ReservationFormComponent implements OnInit, OnChanges {
   ];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService,
+    private loadingService: LoadingService,
+    private reservationService: ReservationService
   ){}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -125,14 +134,31 @@ export class ReservationFormComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.initFormReservation();
+    this.statusChangesForm()
+  }
+
+  async getBlockedDates() : Promise<void>{
+    this.blockedDates = await this.reservationService.getReservedDates();
+  }
+
+  statusChangesForm(){
+    this.formReservation.controls['roomId'].valueChanges.subscribe(
+      async (values) => {
+        console.log(values)
+        if(values != '' && values != null){
+          this.controlDate.reset();
+          await this.getBlockedDates();
+        }
+      }
+    )
   }
 
   initFormReservation(){
     this.formReservation = this.fb.group(
       {
-        roomId: new FormControl<number | null>(null, [Validators.required]),
+        roomId: new FormControl<string>('', [Validators.required]),
         document: new FormControl<number | null>(null, [Validators.required, Validators.minLength(this.minLengthNumber), Validators.maxLength(this.maxLengthNumber)]),
         name: new FormControl<string>('', [Validators.required, Validators.minLength(this.minLengthString), Validators.maxLength(this.maxLengthString)]),
         lastName: new FormControl<string>('', [Validators.required, Validators.minLength(this.minLengthString), Validators.maxLength(this.maxLengthString)]),
@@ -144,6 +170,76 @@ export class ReservationFormComponent implements OnInit, OnChanges {
 
   formValid(): boolean{
     return this.formReservation.valid && this.controlDate.valid;
+  }
+
+  async completeData(){
+    this.loadingService.spinnerShow();
+    const document: number = this.formReservation.get('document')?.value as number;
+    if (!document) {
+      console.warn('El documento no es válido');
+      return;
+    }
+    
+    try{
+      const userData: User[] = await this.userService.getUserByDocument(document);
+      if(userData.length > 0){
+        const user: any = userData[0];
+        Object.keys(user).forEach(key => {
+          if (this.formReservation.get(key)) {
+            this.formReservation.get(key)?.setValue(user[key]);
+          }
+        });
+      }
+    }catch(e){
+      console.error(e);
+    }finally{
+      this.loadingService.spinnerHide();
+    }
+  }
+
+  async roomReservation(){
+    this.loadingService.spinnerShow();
+    const document: number = this.formReservation.get('document')?.value as number;
+
+    try{
+      const userData: User[] = await this.userService.getUserByDocument(document);
+      if(userData.length === 0){
+        userData.push(await this.createUser());
+      }
+
+      const startDate = new Date(this.controlDate.get('start')?.value);
+      const endDate = new Date(this.controlDate.get('end')?.value);
+
+      startDate.setHours(0,0,0,0);
+      endDate.setHours(23, 59, 59, 999);
+
+      const reservation: CreateReservation = {
+        startDate: startDate,
+        endDate: endDate,
+        roomId: this.formReservation.get('roomId')?.value,
+        userId: userData[0].id
+      }
+
+      await this.reservationService.postReservation(reservation);
+    }catch(e){
+      console.error(e);
+    }finally{
+      this.formReservation.reset();
+      this.controlDate.reset();
+      this.blockedDates = [];
+      this.loadingService.spinnerHide();
+    }
+  }
+
+  async createUser(){
+    const user: CreateUser = {
+      document: this.formReservation.get('document')?.value as number,
+      name: this.formReservation.get('name')?.value,
+      lastName: this.formReservation.get('lastName')?.value,
+      email: this.formReservation.get('email')?.value,
+      phone: this.formReservation.get('phone')?.value
+    }
+    return await this.userService.postUser(user);
   }
 
 }

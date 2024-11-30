@@ -14,7 +14,7 @@
                                         [control]="formReservation.controls[inputItem.nameControl] | formControl"></app-select>
                         }
                         @case ('date-picker') { 
-                            <app-date-picker class="w-full col-span-2" [label]="inputItem.label" [control]="controlDate"
+                            <app-date-picker class="w-full col-span-2" [label]="inputItem.label" [control]="controlDate" [blockedDates]="blockedDates"
                                              ></app-date-picker>
                         }
                         @case ('input') { 
@@ -24,7 +24,12 @@
                                        [placeholder]="inputItem.placeholder+''" [minlength]="inputItem?.min" [maxlength]="inputItem?.max"
                                        [control]="formReservation.controls[inputItem.nameControl] | formControl"></app-input>
                                 @if (inputItem.label == 'Documento') {
-                                    <app-button class="w-145" [name]="'Completar Datos'" [type]="'outline'" [size]="'small'"></app-button>
+                                    <app-button class="w-145" 
+                                                [name]="'Completar Datos'" 
+                                                [type]="'outline'" 
+                                                [size]="'small'" 
+                                                [valid]="formReservation.controls['document'].valid" 
+                                                (clickEvent)="completeData()"></app-button>
                                 }
                             </div>
                             
@@ -39,7 +44,8 @@
             <app-button class="reser-buttton" 
                         [name]="'Reservar'" 
                         [size]="'medium'" 
-                        [valid]="formValid()"></app-button>
+                        [valid]="formValid()" 
+                        (clickEvent)="roomReservation()"></app-button>
 
         </div>
     </section>

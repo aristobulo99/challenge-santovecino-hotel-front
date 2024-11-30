@@ -1,7 +1,7 @@
 <form class="example-form" [formGroup]="control">
     <mat-form-field class="example-full-width" [ngClass]="{'mat-form-field-invalid': control.hasError('invalidRange')}">
         <mat-label>{{label}}</mat-label>
-        <mat-date-range-input  [rangePicker]="picker" [min]="minDate" [max]="maxDate">
+        <mat-date-range-input  [rangePicker]="picker" [min]="minDate" [max]="maxDate" [dateFilter]="dateFilter">
           <input class="input" matStartDate formControlName="start" placeholder="Fecha de inicio">
           <input class="input" matEndDate formControlName="end" placeholder="Fecha de finalización">
         </mat-date-range-input>

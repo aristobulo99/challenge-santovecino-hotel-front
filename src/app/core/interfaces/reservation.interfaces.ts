@@ -7,7 +7,7 @@ export interface DateReservation{
 }
 
 export interface CreateReservation extends DateReservation {
-    userId: number;
+    userId: string;
     roomId: number;
 }
 
