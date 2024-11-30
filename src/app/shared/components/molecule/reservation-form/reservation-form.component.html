@@ -1,0 +1,46 @@
+<app-simple-card class="reser-form-card" [content]="sectionTemplate"></app-simple-card>
+
+<ng-template #sectionTemplate>
+    <section class="full reser-form-section">
+        @for (section of formGroupSection; track $index) {
+            <h1 class="font-text-18 text-turquoise-700">{{section.title}}</h1>
+
+            <div class="w-full reser-form-input">
+                @for (inputItem of section.input; track $index) {
+                    @switch (inputItem.inputType) {
+                        @case ('select') { 
+                            <app-select class="w-full col-span-2" [label]="inputItem.label" 
+                                        [options]="inputItem.options"
+                                        [control]="formReservation.controls[inputItem.nameControl] | formControl"></app-select>
+                        }
+                        @case ('date-picker') { 
+                            <app-date-picker class="w-full col-span-2" [label]="inputItem.label" [control]="controlDate"
+                                             ></app-date-picker>
+                        }
+                        @case ('input') { 
+                            <div class="w-full case-input">
+                                <app-input class="w-full " [type]="inputItem.type" 
+                                       [label]="inputItem.label" 
+                                       [placeholder]="inputItem.placeholder+''" [minlength]="inputItem?.min" [maxlength]="inputItem?.max"
+                                       [control]="formReservation.controls[inputItem.nameControl] | formControl"></app-input>
+                                @if (inputItem.label == 'Documento') {
+                                    <app-button class="w-145" [name]="'Completar Datos'" [type]="'outline'" [size]="'small'"></app-button>
+                                }
+                            </div>
+                            
+                        }
+                    }
+                }
+
+            </div>
+
+        }
+        <div class="full reser-form-buttton">
+            <app-button class="reser-buttton" 
+                        [name]="'Reservar'" 
+                        [size]="'medium'" 
+                        [valid]="formValid()"></app-button>
+
+        </div>
+    </section>
+</ng-template>

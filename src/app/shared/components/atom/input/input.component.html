@@ -3,10 +3,16 @@
         <mat-label class="text-white-beach-500 font-text-16">{{label}}</mat-label>
         <input class="input" [type]="type" matInput [formControl]="control" [placeholder]="placeholder">
         @if (control.hasError('email') && !control.hasError('required')) {
-            <mat-error class="text-red-500 font-text-12">Por favor, introduce una dirección de correo electrónico válida</mat-error>
+            <mat-error class="text-red-500 font-text-12 mat-error">Por favor, introduce una dirección de correo electrónico válida</mat-error>
         }
         @if (control.hasError('required')) {
-            <mat-error class="text-red-500 font-text-12">El campo {{label}} es <strong>requerido.</strong></mat-error>
+            <mat-error class="text-red-500 font-text-12 mat-error">El campo {{label}} es <strong>requerido.</strong></mat-error>
+        }
+        @if (control.hasError('minlength')) {
+            <mat-error class="text-red-500 font-text-12 mat-error">Debe tener al menos {{minlength}} caracteres.</mat-error>
+        }
+        @if (control.hasError('maxlength')) {
+            <mat-error class="text-red-500 font-text-12 mat-error">Debe tener más de {{maxlength}} caracteres.</mat-error>
         }
     </mat-form-field>
 </form>

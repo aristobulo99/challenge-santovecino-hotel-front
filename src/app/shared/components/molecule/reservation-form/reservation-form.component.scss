@@ -1,0 +1,56 @@
+.reser-form-card{
+    display: flex;
+    width: 30.75rem;
+    height: 36.75rem;
+}
+
+.reser-form-section{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.625rem;
+}
+
+.reser-form-input{
+    display: grid;
+    gap: 0.625rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.col-span-2{
+    grid-column: span 2 / span 2;
+}
+
+.w-226{
+    width: 14.125rem;
+}
+.w-145{
+    width: 9.063rem;
+}
+
+.case-input{
+    display: flex;
+    flex-direction: row;
+}
+
+.case-input:first-child{
+    grid-column: span 2 / span 2;
+    gap: 0.625rem;
+    justify-content: space-between;
+    align-items: center;
+
+    app-input{
+        width: 19.688rem !important;
+    }
+}
+
+.reser-form-buttton{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.reser-buttton{
+    width: 5.375rem;
+}

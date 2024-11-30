@@ -26,20 +26,14 @@ import { MatInputModule } from '@angular/material/input';
 export class DatePickerComponent implements OnInit {
 
   @Input() label!: string;
-  
-  public control: FormGroup = new FormGroup(
-    {
-      start: new FormControl<Date | null>(null, [Validators.required]),
-      end: new FormControl<Date | null>(null, [Validators.required]),
-    },
-    { validators: this.validateDateRange() }
-  );
+  @Input() control!: FormGroup;
 
   public minDate!: Date;
   public maxDate!: Date;
   private isUpdatingErrors = false;
 
   ngOnInit(): void {
+    this.control.setValidators(Validators.compose([this.control.validator,this.validateDateRange()]));
     const currentDate = new Date();
 
     this.minDate = new Date(currentDate); 
@@ -47,7 +41,11 @@ export class DatePickerComponent implements OnInit {
 
   
     this.maxDate.setDate(this.maxDate.getDate() + 30);
+    this.statusChanges();
+    
+  }
 
+  statusChanges(){
     this.control.statusChanges.subscribe(() => {
       if (this.isUpdatingErrors) {
         return;
@@ -62,9 +60,6 @@ export class DatePickerComponent implements OnInit {
         if (invalidRangeError) {
           startControl.setErrors({ invalidRange: true });
           endControl.setErrors({ invalidRange: true });
-        } else {
-          startControl.setErrors(null);
-          endControl.setErrors(null);
         }
         this.isUpdatingErrors = false;
       }

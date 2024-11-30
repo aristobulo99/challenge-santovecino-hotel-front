@@ -5,6 +5,7 @@ import { LoadingService } from '../../core/services/loading/loading.service';
 import { RoomCardComponent } from '../../shared/components/molecule/room-card/room-card.component';
 import { Room } from '../../core/interfaces/room.interfaces';
 import { getRoomList } from '../../core/mocks/room.mock';
+import { ReservationFormComponent } from '../../shared/components/molecule/reservation-form/reservation-form.component';
 
 @Component({
   selector: 'app-availability',
@@ -12,7 +13,8 @@ import { getRoomList } from '../../core/mocks/room.mock';
   imports: [
     SimpleCardComponent, 
     LoadingCardComponent,
-    RoomCardComponent
+    RoomCardComponent,
+    ReservationFormComponent
   ],
   templateUrl: './availability.component.html',
   styleUrl: './availability.component.scss'

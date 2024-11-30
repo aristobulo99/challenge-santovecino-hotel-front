@@ -21,5 +21,7 @@ export class InputComponent {
   @Input() placeholder!: string;
   @Input() type: 'text' | 'number' | 'email' = 'text';
   @Input() control: FormControl = new FormControl();
+  @Input() minlength?: number;
+  @Input() maxlength?: number;
 
 }
