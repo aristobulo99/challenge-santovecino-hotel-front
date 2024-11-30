@@ -1,0 +1,14 @@
+.reserv-edit-form-section{
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    padding: 0.625rem;
+    box-sizing: border-box;
+}
+
+.reserv-edit-form-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.625rem;
+}

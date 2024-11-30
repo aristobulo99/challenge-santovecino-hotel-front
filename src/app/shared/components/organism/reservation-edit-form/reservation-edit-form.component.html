@@ -1,0 +1,14 @@
+<section class="w-full reserv-edit-form-section">
+
+    <h1 class="w-full font-text-18 text-turquoise-700">Modificar Fecha de Reserva</h1>
+
+    <p class="w-full font-text-16 text-turquoise-700">Por favor, seleccione el nuevo rango de fechas para su reserva. Asegúrese de que las fechas estén disponibles antes de confirmar los cambios.</p>
+
+    <app-date-picker class="w-full" [control]="controlDate" [label]="'Fechas de reservacion'"></app-date-picker>
+
+    <div class="w-full reserv-edit-form-buttons">
+        <app-button [name]="'Confirmar'" [size]="'medium'" [valid]="controlDate.valid" (clickEvent)="onConfirm()"></app-button>
+
+        <app-button [name]="'Cancelar'" [size]="'medium'" [type]="'outline'" (clickEvent)="onCancel()"></app-button>
+    </div>
+</section>

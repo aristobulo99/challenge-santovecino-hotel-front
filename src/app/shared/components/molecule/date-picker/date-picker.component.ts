@@ -39,7 +39,7 @@ export class DatePickerComponent implements OnInit {
     this.minDate = new Date(currentDate); 
     this.maxDate = new Date(currentDate);
 
-  
+    this.minDate.setDate(this.minDate.getDate() + 1);
     this.maxDate.setDate(this.maxDate.getDate() + 30);
     this.statusChanges();
     
@@ -60,6 +60,10 @@ export class DatePickerComponent implements OnInit {
         if (invalidRangeError) {
           startControl.setErrors({ invalidRange: true });
           endControl.setErrors({ invalidRange: true });
+        }else{
+          startControl.setErrors(null);
+          endControl.setErrors(null);
+
         }
         this.isUpdatingErrors = false;
       }

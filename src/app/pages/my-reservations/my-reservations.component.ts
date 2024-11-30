@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ReservationSearchFormComponent } from '../../shared/components/organism/reservation-search-form/reservation-search-form.component';
 import { NgTemplateOutlet } from '@angular/common';
 import { MyReservation, RoomReservation } from '../../core/interfaces/reservation.interfaces';
@@ -11,6 +11,7 @@ import { DateFormatPipe } from '../../shared/pipe/date-format/date-format.pipe';
 import { TableComponent } from '../../shared/components/molecule/table/table.component';
 import { S } from '@angular/cdk/keycodes';
 import { DialogService } from '../../core/services/dialog/dialog.service';
+import { ReservationEditFormComponent } from '../../shared/components/organism/reservation-edit-form/reservation-edit-form.component';
 
 @Component({
   selector: 'app-my-reservations',
@@ -19,12 +20,15 @@ import { DialogService } from '../../core/services/dialog/dialog.service';
     ReservationSearchFormComponent,
     NgTemplateOutlet,
     UserDescriptionComponent,
-    TableComponent
+    TableComponent,
+    ReservationEditFormComponent
   ],
   templateUrl: './my-reservations.component.html',
   styleUrl: './my-reservations.component.scss'
 })
 export class MyReservationsComponent {
+
+  @ViewChild('reservEditTemplate') reservEditTemplate: TemplateRef<any> | undefined;
 
   public existingGuest: boolean = false;
   public reservation!: MyReservation;
@@ -58,12 +62,11 @@ export class MyReservationsComponent {
     return new Promise<DataSource[]>((resolve, reject) => {
       const dataSource: DataSource[] = roomReservation.map<DataSource>(rr => (
         {
-          'id': rr.room.id,
-          'state': rr.room.state,
           'Habitación': rr.room.name,
           'Fecha': `${dataForm.transform(rr.startDate, "DD/MM/YYYY") } - ${dataForm.transform(rr.endDate, "DD/MM/YYYY") }`,
           'Estado': rr.room.state ? 'Confirmado' : 'Cancelado',
-          'actions': rr.room.state ?  [{title:'Cancelar', type: 'outline', size:"small"}, {title:'Modificar', type: 'flat', size:"small"}] : []
+          'actions': rr.room.state ?  [{title:'Cancelar', type: 'outline', size:"small"}, {title:'Modificar', type: 'flat', size:"small"}] : [],
+          ...rr.room
         }
       ));
       resolve(dataSource);
@@ -84,10 +87,18 @@ export class MyReservationsComponent {
             nameCancelButton: 'Cancelar'
           }
         )
-        console.log(respt.action)
+        console.log(respt?.action)
         break;
       case('Modificar'): 
-      console.log('Dialog modificar fechas')
+        await this.dialogService.openDialog(
+          {
+            title: '',
+            width:'30.625rem',
+            buttonsEnabled: false,
+            templete: this.reservEditTemplate
+          }
+        )
+        console.log('Dialog modificar fechas')
         break;
     }
   }
