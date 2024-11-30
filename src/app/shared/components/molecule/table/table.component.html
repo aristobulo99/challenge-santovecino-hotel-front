@@ -16,7 +16,8 @@
                                         <app-button class="w-89" 
                                                     [name]="actionItem.title" 
                                                     [size]="actionItem.size"  
-                                                    [type]="actionItem.type"></app-button>
+                                                    [type]="actionItem.type" 
+                                                    (clickEvent)="actionSelectio(actionItem.title, element)"></app-button>
                                     }
                                 </div>
                             </td>

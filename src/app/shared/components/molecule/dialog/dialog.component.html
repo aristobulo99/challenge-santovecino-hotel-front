@@ -1,0 +1,31 @@
+<section class="w-full dialog-container">
+    @if (data.title != '') {
+        <h1 class="w-full font-text-18 text-turquoise-700 dialog-title">{{data.title}}</h1>
+    }
+
+    @if (data.text) {
+        <p class="w-full font-text-16 text-turquoise-700 dialog-text">{{data.text}}</p>
+    }
+
+    @if (templateRef) {
+        <ng-container *ngTemplateOutlet="templateRef"></ng-container>
+    }
+
+    @if (data.buttonsEnabled) {
+        <div class="dialog-buttons" 
+             [ngClass]="{
+                'flex-col': data.flexDirectionButton == 'col',
+                'flex-row': data.flexDirectionButton == 'row',
+                'flex-col-reverse': data.flexDirectionButton == 'col-reverse',
+                'flex-row-reverse': data.flexDirectionButton == 'row-reverse',
+             }">
+             @if (data.nameAcceptButton) {
+                <app-button class="w-150" [name]="data.nameAcceptButton" (clickEvent)="onConfirm()"></app-button>
+            }
+
+            @if (data.nameCancelButton) {
+                <app-button class="w-150" [name]="data.nameCancelButton" [type]="'outline'" (clickEvent)="onCancel()"></app-button>
+            }
+        </div>
+    }
+</section>

@@ -3,7 +3,7 @@
         <div class="user-reservation">
             <app-user-description [user]="reservation.user"></app-user-description>
 
-            <app-table [data]="data" [displayedColumns]="displayedColumns"></app-table>
+            <app-table [data]="data" [displayedColumns]="displayedColumns" (actionsEvent)="optionEvent($event)"></app-table>
         </div>
     }@else {
         <div [ngTemplateOutlet]="reservSearchFormTemplete"></div>

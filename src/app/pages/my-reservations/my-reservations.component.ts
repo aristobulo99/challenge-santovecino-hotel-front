@@ -9,6 +9,8 @@ import { UserDescriptionComponent } from '../../shared/components/molecule/user-
 import { DataSource } from '../../core/interfaces/table.interfaces';
 import { DateFormatPipe } from '../../shared/pipe/date-format/date-format.pipe';
 import { TableComponent } from '../../shared/components/molecule/table/table.component';
+import { S } from '@angular/cdk/keycodes';
+import { DialogService } from '../../core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-my-reservations',
@@ -31,7 +33,8 @@ export class MyReservationsComponent {
 
 
   constructor(
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private dialogService: DialogService
   ){}
 
   async searchDocument(document: number){
@@ -65,6 +68,28 @@ export class MyReservationsComponent {
       ));
       resolve(dataSource);
     });
+  }
+
+  async optionEvent(option: {action: string, data: DataSource}){
+    switch(option.action){
+      case('Cancelar'): 
+        const respt = await this.dialogService.openDialog(
+          {
+            title: 'Cancelar Reserva',
+            text: 'Esta acción cancelará la reserva de la habitación. Este cambio no puede deshacerse.',
+            width: '25rem',
+            buttonsEnabled: true,
+            flexDirectionButton: 'row',
+            nameAcceptButton: 'Confirmar',
+            nameCancelButton: 'Cancelar'
+          }
+        )
+        console.log(respt.action)
+        break;
+      case('Modificar'): 
+      console.log('Dialog modificar fechas')
+        break;
+    }
   }
 
 }
