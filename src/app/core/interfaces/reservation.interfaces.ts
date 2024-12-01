@@ -8,7 +8,7 @@ export interface DateReservation{
 
 export interface CreateReservation extends DateReservation {
     userId: string;
-    roomId: number;
+    roomId: string;
 }
 
 export interface Reservation extends CreateReservation { 

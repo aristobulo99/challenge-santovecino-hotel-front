@@ -7,5 +7,5 @@ export interface CreateRoom{
 }
 
 export interface Room extends CreateRoom {
-    id: number;
+    id: string;
 }

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreateReservation, Reservation } from '../../interfaces/reservation.interfaces';
+import { CreateReservation, Reservation, RoomReservation } from '../../interfaces/reservation.interfaces';
 import { lastValueFrom } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { Room } from '../../interfaces/room.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class ReservationService {
     return dateList;
   }
 
-  postReservation(reservation: CreateReservation){
+  async postReservation(reservation: CreateReservation){
     return lastValueFrom(
       this.http.post(`${environment.apiReservation}`, reservation)
     )
@@ -48,4 +49,24 @@ export class ReservationService {
 
     return listDate;
   }
+
+  async getReservationByUserId(userId: string): Promise<Reservation[]>{
+    return await lastValueFrom(
+      this.http.get<Reservation[]>(`${environment.apiReservation}?userId=${userId}`)
+    )
+  }
+
+  mapMyReservation(reservation: Reservation[], room: Room[]): RoomReservation[]{
+    return reservation.map<RoomReservation>(
+      reserv => (
+        {
+          startDate: reserv.startDate,
+          endDate: reserv.endDate,
+          room: room.filter(r => r.id === reserv.roomId)[0]
+        }
+      )
+    )
+  }
+
+
 }

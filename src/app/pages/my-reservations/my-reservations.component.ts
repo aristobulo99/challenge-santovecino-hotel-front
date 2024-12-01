@@ -1,7 +1,7 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ReservationSearchFormComponent } from '../../shared/components/organism/reservation-search-form/reservation-search-form.component';
 import { NgTemplateOutlet } from '@angular/common';
-import { MyReservation, RoomReservation } from '../../core/interfaces/reservation.interfaces';
+import { MyReservation, Reservation, RoomReservation } from '../../core/interfaces/reservation.interfaces';
 import { getUsers } from '../../core/mocks/user.mock';
 import { getRoomReservation } from '../../core/mocks/reservation.mock';
 import { LoadingService } from '../../core/services/loading/loading.service';
@@ -12,6 +12,11 @@ import { TableComponent } from '../../shared/components/molecule/table/table.com
 import { S } from '@angular/cdk/keycodes';
 import { DialogService } from '../../core/services/dialog/dialog.service';
 import { ReservationEditFormComponent } from '../../shared/components/organism/reservation-edit-form/reservation-edit-form.component';
+import { UserService } from '../../core/services/user/user.service';
+import { ReservationService } from '../../core/services/reservation/reservation.service';
+import { User } from '../../core/interfaces/users.interfaces';
+import { RoomService } from '../../core/services/room/room.service';
+import { Room } from '../../core/interfaces/room.interfaces';
 
 @Component({
   selector: 'app-my-reservations',
@@ -38,23 +43,46 @@ export class MyReservationsComponent {
 
   constructor(
     private loadingService: LoadingService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private userService: UserService,
+    private reservationService: ReservationService,
+    private roomService: RoomService
   ){}
 
   async searchDocument(document: number){
-    console.log(`Documento -> ${document}`);
     this.loadingService.spinnerShow();
-    setTimeout(
-      async () => {
+    try{
+
+      const dataUser: User[] = await this.userService.getUserByDocument(document);
+      if(dataUser.length > 0){
+        const dataReservation: Reservation[] = await this.reservationService.getReservationByUserId(dataUser[0].id);
+      
+        const dataRoom: Room[] = [];
+        let controlKey: {[key: string]: Room} = {};
+        await Promise.all(
+          dataReservation.map(async (resetv) => {
+            const room: Room[] = await this.roomService.getRoomById(resetv.roomId);
+            if (!controlKey[room[0].id]) {
+              controlKey[room[0].id] = room[0];
+            }
+          })
+        );
+        dataRoom.push(...Object.values(controlKey));
+        const roomReservation: RoomReservation[] = this.reservationService.mapMyReservation(dataReservation, dataRoom);
         this.reservation = {
-          user: getUsers()[0],
-          roomReservation: getRoomReservation(15)
+          user: dataUser[0],
+          roomReservation: roomReservation
         }
-        this.data = await this.mapReservationToDatasource(this.reservation.roomReservation);
+        this.data = await this.mapReservationToDatasource(roomReservation);
         this.existingGuest = true;
-        this.loadingService.spinnerHide();
-      }, 1500
-    )
+      }
+      
+
+    }catch(e){
+      console.error(e);
+    }finally{
+      this.loadingService.spinnerHide();
+    }
   }
 
   async mapReservationToDatasource(roomReservation: RoomReservation[]): Promise<DataSource[]> {

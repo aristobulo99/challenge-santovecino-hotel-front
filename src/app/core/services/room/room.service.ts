@@ -18,4 +18,10 @@ export class RoomService {
       this.http.get<Room[]>(`${environment.apiRoom}`)
     );
   }
+
+  async getRoomById(roomId: string): Promise<Room[]>{
+    return lastValueFrom(
+      this.http.get<Room[]>(`${environment.apiRoom}?id=${roomId}`)
+    )
+  }
 }
