@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { ReservationState } from "../../core/interfaces/reservation.state.interfaces";
-import { faildReservation, getReservationByUserIdReques, getReservationByUserIdSuccesss, patchReservationDateRequest, patchReservationDateSuccess } from "../actions/reservatio.action";
+import { faildReservation, getReservationByUserIdReques, getReservationByUserIdSuccesss, patchReservationDateRequest, patchReservationDateSuccess, patchReservationStateRequest, patchReservationStateSuccess } from "../actions/reservatio.action";
 
 export const initialReservationStatus: ReservationState = {
     roomReservation: [],
@@ -25,6 +25,15 @@ export const _reservationReducer = createReducer(
         loading: true
     })),
     on(patchReservationDateSuccess, (state, {reservation}) => ({
+        ...state,
+        reservations: state.reservations.map(rv => reservation.id === rv.id ? reservation : rv),
+        loading: false
+    })),
+    on(patchReservationStateRequest, (state) => ({
+        ...state,
+        loading: true
+    })),
+    on(patchReservationStateSuccess, (state, {reservation}) => ({
         ...state,
         reservations: state.reservations.map(rv => reservation.id === rv.id ? reservation : rv),
         loading: false

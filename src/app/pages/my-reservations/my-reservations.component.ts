@@ -20,7 +20,7 @@ import { Room } from '../../core/interfaces/room.interfaces';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { Subject, takeUntil } from 'rxjs';
-import { getReservationByUserIdReques } from '../../store/actions/reservatio.action';
+import { getReservationByUserIdReques, patchReservationStateRequest } from '../../store/actions/reservatio.action';
 import { selectorReservations } from '../../store/selectors/reservation.selector';
 
 @Component({
@@ -93,7 +93,6 @@ export class MyReservationsComponent implements OnDestroy {
           this.data = await this.mapReservationToDatasource([...roomReservation]);
           this.existingGuest = true;
         })
-        console.log(this.data)
       }
     }catch(e){
       console.error(e);
@@ -135,7 +134,9 @@ export class MyReservationsComponent implements OnDestroy {
             nameCancelButton: 'Cancelar'
           }
         )
-        console.log(respt?.action, option.data)
+        if(respt?.action === 'confirm'){
+          this.store.dispatch(patchReservationStateRequest({reservationId: option.data['id'] as string, state: false}))
+        }
         break;
       case('Modificar'): 
         this.optionData = option.data;
@@ -147,7 +148,6 @@ export class MyReservationsComponent implements OnDestroy {
             templete: this.reservEditTemplate
           }
         )
-        console.log('Dialog modificar fechas')
         break;
     }
   }

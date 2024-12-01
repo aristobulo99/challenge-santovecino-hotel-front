@@ -34,7 +34,7 @@ export class ReservationService {
 
   async getReservationByroomId(roomId: string): Promise<Reservation[]>{
     return lastValueFrom(
-      this.http.get<Reservation[]>(`${environment.apiReservation}?roomId=${roomId}`)
+      this.http.get<Reservation[]>(`${environment.apiReservation}?roomId=${roomId}&state=true`)
     )
   }
 
@@ -56,6 +56,10 @@ export class ReservationService {
 
   patchReservationDate(reservationId: string, dates: DateReservation): Observable<Reservation>{
     return this.http.patch<Reservation>(`${environment.apiReservation}/${reservationId}`, dates)
+  }
+
+  patchReservationState(reservationId: string, state: boolean): Observable<Reservation>{
+    return this.http.patch<Reservation>(`${environment.apiReservation}/${reservationId}`, {state})
   }
 
   mapMyReservation(reservation: Reservation[], room: Room[]): RoomReservation[]{

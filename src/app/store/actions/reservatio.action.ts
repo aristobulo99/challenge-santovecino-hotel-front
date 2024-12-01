@@ -22,6 +22,16 @@ export const patchReservationDateSuccess = createAction(
     props<{reservation: Reservation}>()
 );
 
+export const patchReservationStateRequest = createAction(
+    "[Reservation] patch Reservation State Request",
+    props<{reservationId: string, state: boolean}>()
+);
+
+export const patchReservationStateSuccess = createAction(
+    "[Reservation] patch Reservation State Success",
+    props<{reservation: Reservation}>()
+);
+
 export const faildReservation = createAction(
     "[Reservation] faild Reservation",
     props<{error: string}>()

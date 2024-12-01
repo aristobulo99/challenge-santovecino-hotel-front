@@ -14,7 +14,7 @@
       "endDate": "2024-12-07T04:59:59.999Z",
       "roomId": "1",
       "userId": "5d2b",
-      "state": true
+      "state": false
     },
     {
       "id": "218f",
@@ -22,7 +22,7 @@
       "endDate": "2024-12-25T04:59:59.999Z",
       "roomId": "1",
       "userId": "5d2b",
-      "state": true
+      "state": false
     },
     {
       "id": "a885",
@@ -42,8 +42,8 @@
     },
     {
       "id": "547b",
-      "startDate": "2024-12-12T05:00:00.000Z",
-      "endDate": "2024-12-15T04:59:59.999Z",
+      "startDate": "2024-12-23T05:00:00.000Z",
+      "endDate": "2024-12-26T04:59:59.999Z",
       "roomId": "1",
       "userId": "5d2b",
       "state": true

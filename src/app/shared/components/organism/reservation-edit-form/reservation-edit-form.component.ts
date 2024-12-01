@@ -51,7 +51,6 @@ export class ReservationEditFormComponent implements OnChanges {
   async onConfirm(){
     
     if(!(this.controlDate.get('start')?.value && this.controlDate.get('end')?.value)){
-      console.log('Debe establecer un rango')
       return;
     }
     const startDate = new Date(this.controlDate.get('start')?.value);
@@ -65,7 +64,6 @@ export class ReservationEditFormComponent implements OnChanges {
       endDate: endDate
     };
 
-    console.log(this.optionData['id'])
     this.store.dispatch(patchReservationDateRequest({reservationId: this.optionData['id'] as string, dates: dates}))
     this.dialogService.closedAll();
 
