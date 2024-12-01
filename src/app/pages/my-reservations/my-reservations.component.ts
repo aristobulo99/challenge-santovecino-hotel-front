@@ -22,6 +22,7 @@ import { AppState } from '../../store/app.state';
 import { Subject, takeUntil } from 'rxjs';
 import { getReservationByUserIdReques, patchReservationStateRequest } from '../../store/actions/reservatio.action';
 import { selectorReservations } from '../../store/selectors/reservation.selector';
+import { ToastService } from '../../core/services/toast/toast.service';
 
 @Component({
   selector: 'app-my-reservations',
@@ -54,7 +55,8 @@ export class MyReservationsComponent implements OnDestroy {
     private dialogService: DialogService,
     private userService: UserService,
     private reservationService: ReservationService,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private toastService: ToastService
   ){}
 
   ngOnDestroy(): void {
@@ -67,33 +69,34 @@ export class MyReservationsComponent implements OnDestroy {
     try{
 
       const dataUser: User[] = await this.userService.getUserByDocument(document);
-      if(dataUser.length > 0){
-        
-        this.store.dispatch(getReservationByUserIdReques({userId: dataUser[0].id}));
-
-        this.store.select(selectorReservations)
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe( async (dataRoomReserv) => {
-          const dataRoom: Room[] = [];
-          let controlKey: {[key: string]: Room} = {};
-          await Promise.all(
-            dataRoomReserv.map(async (resetv) => {
-                const room: Room[] = await this.roomService.getRoomById(resetv.roomId);
-                if (!controlKey[room[0].id]) {
-                    controlKey[room[0].id] = room[0];
-                }
-            })
-          )
-          dataRoom.push(...Object.values(controlKey));
-          const roomReservation: RoomReservation[] = this.reservationService.mapMyReservation(dataRoomReserv, dataRoom);
-          this.reservation = {
-            user: dataUser[0],
-            roomReservation: [...roomReservation]
-          }
-          this.data = await this.mapReservationToDatasource([...roomReservation]);
-          this.existingGuest = true;
-        })
+      if(dataUser.length === 0){
+        this.toastService.showInfo('No se encontraron reservas asociadas a este documento.')
+        return;
       }
+      this.store.dispatch(getReservationByUserIdReques({userId: dataUser[0].id}));
+
+      this.store.select(selectorReservations)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe( async (dataRoomReserv) => {
+        const dataRoom: Room[] = [];
+        let controlKey: {[key: string]: Room} = {};
+        await Promise.all(
+          dataRoomReserv.map(async (resetv) => {
+              const room: Room[] = await this.roomService.getRoomById(resetv.roomId);
+              if (!controlKey[room[0].id]) {
+                  controlKey[room[0].id] = room[0];
+              }
+          })
+        )
+        dataRoom.push(...Object.values(controlKey));
+        const roomReservation: RoomReservation[] = this.reservationService.mapMyReservation(dataRoomReserv, dataRoom);
+        this.reservation = {
+          user: dataUser[0],
+          roomReservation: [...roomReservation]
+        }
+        this.data = await this.mapReservationToDatasource([...roomReservation]);
+        this.existingGuest = true;
+      })
     }catch(e){
       console.error(e);
     }finally{

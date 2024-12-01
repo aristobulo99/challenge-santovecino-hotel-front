@@ -9,6 +9,7 @@ import { DateReservation } from '../../../../core/interfaces/reservation.interfa
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../store/app.state';
 import { patchReservationDateRequest } from '../../../../store/actions/reservatio.action';
+import { ToastService } from '../../../../core/services/toast/toast.service';
 
 @Component({
   selector: 'app-reservation-edit-form',
@@ -36,6 +37,7 @@ export class ReservationEditFormComponent implements OnChanges {
     private dialogService: DialogService,
     private reservationService: ReservationService,
     private store: Store<AppState>,
+    private toastService: ToastService
   ){}
 
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
@@ -51,6 +53,7 @@ export class ReservationEditFormComponent implements OnChanges {
   async onConfirm(){
     
     if(!(this.controlDate.get('start')?.value && this.controlDate.get('end')?.value)){
+      this.toastService.showInfo('El rango de fechas está incompleto. Selecciona ambas fechas para continuar.');
       return;
     }
     const startDate = new Date(this.controlDate.get('start')?.value);

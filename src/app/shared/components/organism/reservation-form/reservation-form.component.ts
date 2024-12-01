@@ -12,6 +12,7 @@ import { UserService } from '../../../../core/services/user/user.service';
 import { LoadingService } from '../../../../core/services/loading/loading.service';
 import { CreateReservation } from '../../../../core/interfaces/reservation.interfaces';
 import { ReservationService } from '../../../../core/services/reservation/reservation.service';
+import { ToastService } from '../../../../core/services/toast/toast.service';
 
 @Component({
   selector: 'app-reservation-form',
@@ -123,7 +124,8 @@ export class ReservationFormComponent implements OnInit, OnChanges {
     private fb: FormBuilder,
     private userService: UserService,
     private loadingService: LoadingService,
-    private reservationService: ReservationService
+    private reservationService: ReservationService,
+    private toastService: ToastService
   ){}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -146,7 +148,6 @@ export class ReservationFormComponent implements OnInit, OnChanges {
   statusChangesForm(){
     this.formReservation.controls['roomId'].valueChanges.subscribe(
       async (values) => {
-        console.log(values)
         if(values != '' && values != null){
           this.controlDate.reset();
           await this.getBlockedDates();
@@ -176,20 +177,23 @@ export class ReservationFormComponent implements OnInit, OnChanges {
     this.loadingService.spinnerShow();
     const document: number = this.formReservation.get('document')?.value as number;
     if (!document) {
-      console.warn('El documento no es válido');
+      this.toastService.showWarning('El documento no es válido');
       return;
     }
     
     try{
       const userData: User[] = await this.userService.getUserByDocument(document);
-      if(userData.length > 0){
-        const user: any = userData[0];
-        Object.keys(user).forEach(key => {
-          if (this.formReservation.get(key)) {
-            this.formReservation.get(key)?.setValue(user[key]);
-          }
-        });
+      if(userData.length == 0){
+        this.toastService.showInfo('El usuario no está registrado. Por favor, completa la reservación para continuar.');
+        return
       }
+      const user: any = userData[0];
+      Object.keys(user).forEach(key => {
+        if (this.formReservation.get(key)) {
+          this.formReservation.get(key)?.setValue(user[key]);
+        }
+      });
+
     }catch(e){
       console.error(e);
     }finally{
