@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreateReservation, Reservation, RoomReservation } from '../../interfaces/reservation.interfaces';
+import { CreateReservation, DateReservation, Reservation, RoomReservation } from '../../interfaces/reservation.interfaces';
 import { lastValueFrom, Observable, retry } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Room } from '../../interfaces/room.interfaces';
@@ -32,16 +32,16 @@ export class ReservationService {
     )
   }
 
-  async getReservation(): Promise<Reservation[]>{
+  async getReservationByroomId(roomId: string): Promise<Reservation[]>{
     return lastValueFrom(
-      this.http.get<Reservation[]>(`${environment.apiReservation}`)
+      this.http.get<Reservation[]>(`${environment.apiReservation}?roomId=${roomId}`)
     )
   }
 
-  async getReservedDates(){
+  async getReservedDates(roomId: string){
     const listDate: Date[] = [];
 
-    const reservation: Reservation[] =  await this.getReservation();
+    const reservation: Reservation[] =  await this.getReservationByroomId(roomId);
     reservation.forEach(res =>  {
       let dates = this.generateDateRange(res.startDate, res.endDate);
       listDate.push(...dates);
@@ -50,14 +50,12 @@ export class ReservationService {
     return listDate;
   }
 
-  async getReservationByUserId(userId: string): Promise<Reservation[]>{
-    return await lastValueFrom(
-      this.http.get<Reservation[]>(`${environment.apiReservation}?userId=${userId}`)
-    )
+  getReservationByUserId(userId: string): Observable<Reservation[]>{
+    return this.http.get<Reservation[]>(`${environment.apiReservation}?userId=${userId}`)
   }
 
-  getReservationByUserIdTemp(userId: string): Observable<Reservation[]>{
-    return this.http.get<Reservation[]>(`${environment.apiReservation}?userId=${userId}`)
+  patchReservationDate(reservationId: string, dates: DateReservation): Observable<Reservation>{
+    return this.http.patch<Reservation>(`${environment.apiReservation}/${reservationId}`, dates)
   }
 
   mapMyReservation(reservation: Reservation[], room: Room[]): RoomReservation[]{

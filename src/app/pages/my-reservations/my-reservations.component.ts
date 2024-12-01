@@ -45,6 +45,7 @@ export class MyReservationsComponent implements OnDestroy {
   public data: DataSource[] = [];
   public displayedColumns: string[] = ['Habitación', 'Fecha', 'Estado', 'actions'];
   public unsubscribe$: Subject<void> = new Subject<void>();
+  public optionData!: DataSource;
 
 
   constructor(
@@ -107,6 +108,7 @@ export class MyReservationsComponent implements OnDestroy {
       const dataSource: DataSource[] = roomReservation.map<DataSource>(rr => (
         {
           'id': rr.id,
+          'roomId': rr.room.id,
           'state': rr.state,
           'Habitación': rr.room.name,
           'Fecha': `${dataForm.transform(rr.startDate, "DD/MM/YYYY") } - ${dataForm.transform(rr.endDate, "DD/MM/YYYY") }`,
@@ -136,6 +138,7 @@ export class MyReservationsComponent implements OnDestroy {
         console.log(respt?.action, option.data)
         break;
       case('Modificar'): 
+        this.optionData = option.data;
         await this.dialogService.openDialog(
           {
             title: '',

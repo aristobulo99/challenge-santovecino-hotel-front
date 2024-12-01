@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Reservation, RoomReservation } from "../../core/interfaces/reservation.interfaces";
+import { DateReservation, Reservation, RoomReservation } from "../../core/interfaces/reservation.interfaces";
 
 
 export const getReservationByUserIdReques = createAction(
@@ -10,6 +10,16 @@ export const getReservationByUserIdReques = createAction(
 export const getReservationByUserIdSuccesss = createAction(
     "[Reservation] get Reservation By UserId Success",
     props<{reservations: Reservation[]}>()
+);
+
+export const patchReservationDateRequest = createAction(
+    "[Reservation] patch Reservation Date Request",
+    props<{reservationId: string, dates: DateReservation}>()
+);
+
+export const patchReservationDateSuccess = createAction(
+    "[Reservation] patch Reservation Date Success",
+    props<{reservation: Reservation}>()
 );
 
 export const faildReservation = createAction(

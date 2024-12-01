@@ -140,7 +140,7 @@ export class ReservationFormComponent implements OnInit, OnChanges {
   }
 
   async getBlockedDates() : Promise<void>{
-    this.blockedDates = await this.reservationService.getReservedDates();
+    this.blockedDates = await this.reservationService.getReservedDates(this.formReservation.controls['roomId'].value);
   }
 
   statusChangesForm(){
