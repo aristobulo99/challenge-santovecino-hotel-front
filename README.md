@@ -35,7 +35,6 @@ Antes de comenzar, aseg√∫rate de tener **Node.js** y **npm** instalados en tu m√
 
    ```bash
    git clone https://github.com/aristobulo99/challenge-santovecino-hotel-front
-   cd ultimo-hotel-cancun
 
 2. Instala las dependencias:
 
