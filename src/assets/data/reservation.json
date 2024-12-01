@@ -63,6 +63,70 @@
       "roomId": "1",
       "userId": "8f27",
       "state": true
+    },
+    {
+      "id": "598e",
+      "startDate": "2024-12-04T05:00:00.000Z",
+      "endDate": "2024-12-07T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "e292",
+      "state": false
+    },
+    {
+      "id": "3313",
+      "startDate": "2024-12-08T05:00:00.000Z",
+      "endDate": "2024-12-11T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "e292",
+      "state": true
+    },
+    {
+      "id": "4d09",
+      "startDate": "2024-12-12T05:00:00.000Z",
+      "endDate": "2024-12-15T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "e292",
+      "state": true
+    },
+    {
+      "id": "6fe7",
+      "startDate": "2024-12-15T05:00:00.000Z",
+      "endDate": "2024-12-18T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "e292",
+      "state": true
+    },
+    {
+      "id": "c6f4",
+      "startDate": "2024-12-18T05:00:00.000Z",
+      "endDate": "2024-12-21T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "e292",
+      "state": true
+    },
+    {
+      "id": "4a04",
+      "startDate": "2024-12-21T05:00:00.000Z",
+      "endDate": "2024-12-23T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "e292",
+      "state": true
+    },
+    {
+      "id": "63ca",
+      "startDate": "2024-12-26T05:00:00.000Z",
+      "endDate": "2024-12-28T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "e292",
+      "state": true
+    },
+    {
+      "id": "f64e",
+      "startDate": "2024-12-04T05:00:00.000Z",
+      "endDate": "2024-12-07T04:59:59.999Z",
+      "roomId": "1",
+      "userId": "5d2b",
+      "state": false
     }
   ]
 }

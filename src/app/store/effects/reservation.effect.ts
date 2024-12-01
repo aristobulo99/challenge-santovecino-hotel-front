@@ -18,7 +18,6 @@ export abstract class Wrapper {
         private reservationService: ReservationService
     ){
         super(actions$);
-        console.log('ReservationEffect initialized');
     }
 
     getReservationByUserId$ = createEffect(

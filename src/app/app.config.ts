@@ -11,6 +11,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { ROOT_REDUCERS } from './store/app.state';
 import { ReservationEffects } from './store/effects/reservation.effect';
 import { provideToastr } from 'ngx-toastr';
+import { RoomEffects } from './store/effects/room.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideNoopAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
     provideStore(ROOT_REDUCERS),
-    provideEffects(ReservationEffects),
+    provideEffects(ReservationEffects, RoomEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideAnimations(),
     provideToastr()

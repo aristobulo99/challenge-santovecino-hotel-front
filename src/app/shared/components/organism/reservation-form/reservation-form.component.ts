@@ -13,6 +13,9 @@ import { LoadingService } from '../../../../core/services/loading/loading.servic
 import { CreateReservation } from '../../../../core/interfaces/reservation.interfaces';
 import { ReservationService } from '../../../../core/services/reservation/reservation.service';
 import { ToastService } from '../../../../core/services/toast/toast.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../store/app.state';
+import { getAllRoomRequest } from '../../../../store/actions/room.action';
 
 @Component({
   selector: 'app-reservation-form',
@@ -125,7 +128,8 @@ export class ReservationFormComponent implements OnInit, OnChanges {
     private userService: UserService,
     private loadingService: LoadingService,
     private reservationService: ReservationService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private store: Store<AppState>
   ){}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -226,6 +230,7 @@ export class ReservationFormComponent implements OnInit, OnChanges {
       }
 
       await this.reservationService.postReservation(reservation);
+      this.store.dispatch(getAllRoomRequest());
     }catch(e){
       console.error(e);
     }finally{

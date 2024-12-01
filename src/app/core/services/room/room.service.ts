@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Room } from '../../interfaces/room.interfaces';
 
@@ -17,6 +17,10 @@ export class RoomService {
     return lastValueFrom(
       this.http.get<Room[]>(`${environment.apiRoom}`)
     );
+  }
+
+  getRoomsObs(): Observable<Room[]>{
+    return this.http.get<Room[]>(`${environment.apiRoom}`)
   }
 
   async getRoomById(roomId: string): Promise<Room[]>{
