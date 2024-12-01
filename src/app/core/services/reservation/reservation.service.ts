@@ -40,11 +40,14 @@ export class ReservationService {
 
   async getReservedDates(roomId: string){
     const listDate: Date[] = [];
+    const currentDate: Date = new Date()
 
     const reservation: Reservation[] =  await this.getReservationByroomId(roomId);
     reservation.forEach(res =>  {
-      let dates = this.generateDateRange(res.startDate, res.endDate);
-      listDate.push(...dates);
+      if(new Date(res.startDate) >= currentDate || new Date(res.endDate) >= currentDate){
+        let dates = this.generateDateRange(res.startDate, res.endDate);
+        listDate.push(...dates);
+      }
     })
 
     return listDate;
