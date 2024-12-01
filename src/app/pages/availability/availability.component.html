@@ -1,16 +1,19 @@
 <section class="section-availa" >
-    <div style="overflow-x: hidden; padding-right: 0.875rem; margin-right: 0.625rem;">
-        <div class="room-content">
-            @if (loadingCard) { 
-                <app-loading-card [numberCards]="2"></app-loading-card>
-            }@else {
-                @for (room of dataRoom; track $index) {
-                    <app-room-card class="w-full m-b-10" [dataRoom]="room"></app-room-card>
+    <div class="scroll-section">
+        <div class="availa-content">
+            <div class="room-content">
+                @if (loadingCard) { 
+                    <app-loading-card [numberCards]="2"></app-loading-card>
+                }@else {
+                    @for (room of dataRoom; track $index) {
+                        <app-room-card class="w-full room-card-margin" [dataRoom]="room"></app-room-card>
+                    }
                 }
-            }
+            </div>
         </div>
+        
+    
+        <app-reservation-form [dataRoom]="dataRoom"></app-reservation-form>
     </div>
     
-
-    <app-reservation-form [dataRoom]="dataRoom"></app-reservation-form>
 </section>

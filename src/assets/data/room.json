@@ -1,7 +1,7 @@
 {
     "room": [
         {
-            "id": 1,
+            "id": "1",
             "name": "Habitacion N° 1", 
             "description": "Este espacioso alojamiento cuenta con una cama king-size, aire acondicionado para mantenerte fresco durante todo el día, y un balcón privado con vistas a los hermosos paisajes tropicales o al mar Caribe. La habitación incluye un baño privado, ducha de efecto lluvia . También tendrás acceso a TV de pantalla plana con cable, Wi-Fi de alta velocidad, minibar y servicio a la habitación 24/7.\n\n¡Una experiencia perfecta para desconectarte y disfrutar de Cancún en toda su esencia!",
             "image": "https://i.pinimg.com/736x/ee/50/96/ee509670391a3fbb01cccea28d619790.jpg",

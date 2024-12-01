@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 32.813rem;
+    
 }
 
 .reserv-search-section{
@@ -19,5 +19,17 @@
     justify-content: flex-start;
     align-items: center;
     gap: 0.625rem;
+}
+
+@media (min-width: 300px) {
+    .reserv-search-card{
+        width: 22.813rem;
+    }
+}
+
+@media (min-width: 1536px) {
+    .reserv-search-card{
+        width: 32.813rem;
+    }
 }
 

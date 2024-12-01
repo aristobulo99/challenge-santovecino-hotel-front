@@ -1,23 +1,41 @@
+@media (min-width: 300px) {
+    .size-large{
+        height: 2rem;
+    }
+    
+    .size-medium{
+        height: 1.875rem;
+    }
+    
+    .size-small{
+        height: 2.2rem;
+    }
+}
+
+
+@media (min-width: 1536px) {
+    .size-large{
+        height: 2.875rem;
+    }
+    
+    .size-medium{
+        height: 2.5rem;
+    }
+    
+    .size-small{
+        height: 1.875rem;
+    }
+}
+
+
 .button-container{
     width: 100%;
     padding: 0 10px;
     font-family: 'Roboto', sans-serif;
     font-weight: 900;
     border-radius: 0.625rem;
-    font-size: 16px;
 }
 
-.size-large{
-    height: 2.875rem;
-}
-
-.size-medium{
-    height: 2.5rem;
-}
-
-.size-small{
-    height: 1.875rem;
-}
 
 .type-flat{
     border: none;

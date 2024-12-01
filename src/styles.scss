@@ -31,33 +31,6 @@ body{
     -webkit-text-fill-color: transparent;
 }
 
-.font-text-title-init{
-    font-size: 2.5rem;
-    font-style: italic;
-    margin: 0;
-}
-
-.font-text-12{
-    font-size: 0.75rem;
-    margin: 0;
-}
-
-.font-text-14{
-    font-size: 0.875rem;
-    margin: 0;
-}
-
-.font-text-16{
-    font-size: 1rem;
-    margin: 0;
-}
-
-.font-text-18{
-    font-size:1.125rem;
-    font-weight: 900;
-    margin: 0;
-}
-
 .text-turquoise-700{
     color: #0a6f94;
 }
@@ -164,3 +137,63 @@ body{
 
 // regular style toast
 @import 'ngx-toastr/toastr';
+
+@media (min-width: 300px) {
+    .font-text-title-init{
+        font-size: 1.25rem;
+        font-style: italic;
+        margin: 0;
+    }
+    
+    .font-text-12 {
+        font-size: 0.688rem;
+        margin: 0;
+    }
+
+    .font-text-14 {
+        font-size: 0.75rem;
+        margin: 0;
+    }
+
+    .font-text-16 {
+        font-size: 0.875rem;
+        margin: 0;
+    }
+
+    .font-text-18 {
+        font-size: 1rem; 
+        font-weight: 900;
+        margin: 0;
+    }
+}
+
+
+
+@media (min-width: 1536px) {
+    .font-text-title-init{
+        font-size: 2.5rem;
+        font-style: italic;
+        margin: 0;
+    }
+    
+    .font-text-12{
+        font-size: 0.75rem;
+        margin: 0;
+    }
+    
+    .font-text-14{
+        font-size: 0.875rem;
+        margin: 0;
+    }
+    
+    .font-text-16{
+        font-size: 1rem;
+        margin: 0;
+    }
+    
+    .font-text-18{
+        font-size:1.125rem;
+        font-weight: 900;
+        margin: 0;
+    }
+}

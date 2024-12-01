@@ -1,3 +1,17 @@
+.icon-title{
+    width: 2.75rem;
+    height: 2.875rem;
+    border-radius: 0.938rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    margin-left: 1.5rem;
+    cursor: pointer;
+}
+
+
 .header-section{
     width: 100%; 
     height: auto;
@@ -15,18 +29,7 @@
     justify-content: space-between;
 }
 
-.icon-title{
-    width: 8.75rem;
-    height: 2.875rem;
-    border-radius: 0.938rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.625rem;
-    margin-left: 1.5rem;
-    cursor: pointer;
-}
+
 
 .icon-title:hover{
     background-color: #a2f0ff;
@@ -44,4 +47,18 @@
     align-items: center;
     gap: 0.625rem;
     margin-right: 1.5rem;
+}
+
+@media (min-width: 300px) {
+    .icon-title{
+        h1{
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 1536px) {
+    h1{
+        display: flex !important;
+    }
 }
