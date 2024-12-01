@@ -6,6 +6,7 @@ import { Room } from '../../core/interfaces/room.interfaces';
 import { getRoomList } from '../../core/mocks/room.mock';
 import { ReservationFormComponent } from '../../shared/components/organism/reservation-form/reservation-form.component';
 import { RoomService } from '../../core/services/room/room.service';
+import { ReservationService } from '../../core/services/reservation/reservation.service';
 
 @Component({
   selector: 'app-availability',
@@ -25,7 +26,8 @@ export class AvailabilityComponent implements OnInit{
 
   constructor(
     private loadingService: LoadingService,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private reservationService: ReservationService
   ){
 
   }
@@ -41,11 +43,21 @@ export class AvailabilityComponent implements OnInit{
   async getAllRoom(){
     try{
       this.dataRoom = await this.roomService.getRooms();
+      await this.availabilityStatusValidation();
     }catch(e){
       console.error(e);
     }finally {
       this.loadingCard = false;
       this.loadingService.spinnerHide();
     }
+  }
+
+  async availabilityStatusValidation(){
+    this.dataRoom.forEach(
+      async (room) => {
+        const dates: Date[] = await this.reservationService.getReservedDates(room.id);
+        room.state = dates.length <= 30;
+      }
+    )
   }
 }
