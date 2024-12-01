@@ -8,8 +8,10 @@ export function getRoomReservation(iterations: number = 1): RoomReservation[]{
     for(let i = 0; i < iterations; i++){
         data.push(
             {
+                id: faker.number.int()+'',
                 startDate: faker.date.anytime(),
                 endDate: faker.date.anytime(), 
+                state: faker.datatype.boolean(),
                 room: getRoomList()[0]
             }
         )

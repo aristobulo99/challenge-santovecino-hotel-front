@@ -217,7 +217,8 @@ export class ReservationFormComponent implements OnInit, OnChanges {
         startDate: startDate,
         endDate: endDate,
         roomId: this.formReservation.get('roomId')?.value,
-        userId: userData[0].id
+        userId: userData[0].id,
+        state: true,
       }
 
       await this.reservationService.postReservation(reservation);

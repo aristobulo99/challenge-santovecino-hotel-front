@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateReservation, Reservation, RoomReservation } from '../../interfaces/reservation.interfaces';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable, retry } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Room } from '../../interfaces/room.interfaces';
 
@@ -56,12 +56,18 @@ export class ReservationService {
     )
   }
 
+  getReservationByUserIdTemp(userId: string): Observable<Reservation[]>{
+    return this.http.get<Reservation[]>(`${environment.apiReservation}?userId=${userId}`)
+  }
+
   mapMyReservation(reservation: Reservation[], room: Room[]): RoomReservation[]{
     return reservation.map<RoomReservation>(
       reserv => (
         {
+          id: reserv.id,
           startDate: reserv.startDate,
           endDate: reserv.endDate,
+          state: reserv.state,
           room: room.filter(r => r.id === reserv.roomId)[0]
         }
       )

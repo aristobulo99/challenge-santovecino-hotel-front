@@ -5,6 +5,8 @@
 .example-container {
     height: 33rem;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
   }
 
 .w-982{

@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { ReservationSearchFormComponent } from '../../shared/components/organism/reservation-search-form/reservation-search-form.component';
 import { NgTemplateOutlet } from '@angular/common';
 import { MyReservation, Reservation, RoomReservation } from '../../core/interfaces/reservation.interfaces';
@@ -17,6 +17,11 @@ import { ReservationService } from '../../core/services/reservation/reservation.
 import { User } from '../../core/interfaces/users.interfaces';
 import { RoomService } from '../../core/services/room/room.service';
 import { Room } from '../../core/interfaces/room.interfaces';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.state';
+import { Subject, takeUntil } from 'rxjs';
+import { getReservationByUserIdReques } from '../../store/actions/reservatio.action';
+import { selectorReservations } from '../../store/selectors/reservation.selector';
 
 @Component({
   selector: 'app-my-reservations',
@@ -31,7 +36,7 @@ import { Room } from '../../core/interfaces/room.interfaces';
   templateUrl: './my-reservations.component.html',
   styleUrl: './my-reservations.component.scss'
 })
-export class MyReservationsComponent {
+export class MyReservationsComponent implements OnDestroy {
 
   @ViewChild('reservEditTemplate') reservEditTemplate: TemplateRef<any> | undefined;
 
@@ -39,9 +44,11 @@ export class MyReservationsComponent {
   public reservation!: MyReservation;
   public data: DataSource[] = [];
   public displayedColumns: string[] = ['Habitación', 'Fecha', 'Estado', 'actions'];
+  public unsubscribe$: Subject<void> = new Subject<void>();
 
 
   constructor(
+    private store: Store<AppState>,
     private loadingService: LoadingService,
     private dialogService: DialogService,
     private userService: UserService,
@@ -49,35 +56,44 @@ export class MyReservationsComponent {
     private roomService: RoomService
   ){}
 
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
   async searchDocument(document: number){
     this.loadingService.spinnerShow();
     try{
 
       const dataUser: User[] = await this.userService.getUserByDocument(document);
       if(dataUser.length > 0){
-        const dataReservation: Reservation[] = await this.reservationService.getReservationByUserId(dataUser[0].id);
-      
-        const dataRoom: Room[] = [];
-        let controlKey: {[key: string]: Room} = {};
-        await Promise.all(
-          dataReservation.map(async (resetv) => {
-            const room: Room[] = await this.roomService.getRoomById(resetv.roomId);
-            if (!controlKey[room[0].id]) {
-              controlKey[room[0].id] = room[0];
-            }
-          })
-        );
-        dataRoom.push(...Object.values(controlKey));
-        const roomReservation: RoomReservation[] = this.reservationService.mapMyReservation(dataReservation, dataRoom);
-        this.reservation = {
-          user: dataUser[0],
-          roomReservation: roomReservation
-        }
-        this.data = await this.mapReservationToDatasource(roomReservation);
-        this.existingGuest = true;
-      }
-      
+        
+        this.store.dispatch(getReservationByUserIdReques({userId: dataUser[0].id}));
 
+        this.store.select(selectorReservations)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe( async (dataRoomReserv) => {
+          const dataRoom: Room[] = [];
+          let controlKey: {[key: string]: Room} = {};
+          await Promise.all(
+            dataRoomReserv.map(async (resetv) => {
+                const room: Room[] = await this.roomService.getRoomById(resetv.roomId);
+                if (!controlKey[room[0].id]) {
+                    controlKey[room[0].id] = room[0];
+                }
+            })
+          )
+          dataRoom.push(...Object.values(controlKey));
+          const roomReservation: RoomReservation[] = this.reservationService.mapMyReservation(dataRoomReserv, dataRoom);
+          this.reservation = {
+            user: dataUser[0],
+            roomReservation: [...roomReservation]
+          }
+          this.data = await this.mapReservationToDatasource([...roomReservation]);
+          this.existingGuest = true;
+        })
+        console.log(this.data)
+      }
     }catch(e){
       console.error(e);
     }finally{
@@ -90,11 +106,12 @@ export class MyReservationsComponent {
     return new Promise<DataSource[]>((resolve, reject) => {
       const dataSource: DataSource[] = roomReservation.map<DataSource>(rr => (
         {
+          'id': rr.id,
+          'state': rr.state,
           'Habitación': rr.room.name,
           'Fecha': `${dataForm.transform(rr.startDate, "DD/MM/YYYY") } - ${dataForm.transform(rr.endDate, "DD/MM/YYYY") }`,
-          'Estado': rr.room.state ? 'Confirmado' : 'Cancelado',
-          'actions': rr.room.state ?  [{title:'Cancelar', type: 'outline', size:"small"}, {title:'Modificar', type: 'flat', size:"small"}] : [],
-          ...rr.room
+          'Estado': rr.state ? 'Confirmado' : 'Cancelado',
+          'actions': rr.state ?  [{title:'Cancelar', type: 'outline', size:"small"}, {title:'Modificar', type: 'flat', size:"small"}] : [],
         }
       ));
       resolve(dataSource);
@@ -102,6 +119,7 @@ export class MyReservationsComponent {
   }
 
   async optionEvent(option: {action: string, data: DataSource}){
+
     switch(option.action){
       case('Cancelar'): 
         const respt = await this.dialogService.openDialog(
@@ -115,7 +133,7 @@ export class MyReservationsComponent {
             nameCancelButton: 'Cancelar'
           }
         )
-        console.log(respt?.action)
+        console.log(respt?.action, option.data)
         break;
       case('Modificar'): 
         await this.dialogService.openDialog(

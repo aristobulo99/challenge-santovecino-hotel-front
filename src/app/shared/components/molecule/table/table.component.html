@@ -41,18 +41,14 @@
                 }
             }
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    
-            @if (data.length == 0) {
-                <tr class="action-content" *matNoDataRow>
-                    <td class="text-turquoise-950 font-text-14 font-w-500" colspan="4">No se encontraron reservaciones.</td>
-                </tr>
-            }
-    
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{
                 'row-content-confir': row['state'],
                 'row-content-cancel': !row['state']
             }"></tr>
         </table>
+        @if (data.length == 0) {
+            <p class="text-turquoise-950 font-text-14 font-w-500">No se encontraron reservaciones.</p>
+        }
     </section>
 
 </ng-template>

@@ -4,6 +4,7 @@ import { User } from "./users.interfaces";
 export interface DateReservation{
     startDate: Date;
     endDate: Date;
+    state: boolean;
 }
 
 export interface CreateReservation extends DateReservation {
@@ -12,10 +13,11 @@ export interface CreateReservation extends DateReservation {
 }
 
 export interface Reservation extends CreateReservation { 
-    id: number;
+    id: string;
 }
 
 export interface RoomReservation extends DateReservation {
+    id: string;
     room: Room
 }
 
