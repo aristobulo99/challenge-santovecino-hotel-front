@@ -45,6 +45,20 @@ Antes de comenzar, asegúrate de tener **Node.js** y **npm** instalados en tu m�
 
 Esto iniciará la aplicación Angular y los servidores de JSON Server en paralelo, permitiéndote interactuar con la API localmente.
 
+## Información de la Versión
+Este proyecto está configurado con las siguientes versiones de herramientas y dependencias:
+
+- Angular CLI: 18.2.6
+- Node: 20.16.0
+- Gestor de Paquetes: npm 10.8.1
+- Sistema Operativo: win32 x64
+### Dependencias de Angular
+- @angular-devkit/architect: 0.1802.6 (solo CLI)
+- @angular-devkit/core: 18.2.6 (solo CLI)
+- @angular-devkit/schematics: 18.2.6 (solo CLI)
+- @schematics/angular: 18.2.6 (solo CLI)
+
+
 ## Ajustes de Responsividad
 Los estilos de responsividad en este proyecto están configurados para adaptarse a las siguientes resoluciones de pantalla:
 
