@@ -1,5 +1,4 @@
 .icon-title{
-    width: 2.75rem;
     height: 2.875rem;
     border-radius: 0.938rem;
     display: flex;
@@ -51,6 +50,7 @@
 
 @media (min-width: 300px) {
     .icon-title{
+        width: 2.875rem;
         h1{
             display: none;
         }
@@ -58,6 +58,9 @@
 }
 
 @media (min-width: 1536px) {
+    .icon-title{
+        width: 8.75rem;
+    }
     h1{
         display: flex !important;
     }

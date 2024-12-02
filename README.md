@@ -45,4 +45,33 @@ Antes de comenzar, asegúrate de tener **Node.js** y **npm** instalados en tu m�
 
 Esto iniciará la aplicación Angular y los servidores de JSON Server en paralelo, permitiéndote interactuar con la API localmente.
 
+## Ajustes de Responsividad
+Los estilos de responsividad en este proyecto están configurados para adaptarse a las siguientes resoluciones de pantalla:
+
+- Pantallas grandes: 1536 x 710
+- Pantallas pequeñas (móviles - iPhone 12 Pro): 390 x 844
+
+Los puntos de quiebre y las media queries han sido ajustados para garantizar una correcta visualización en estos tamaños de pantalla, proporcionando una experiencia de usuario óptima tanto en dispositivos grandes como pequeños.
+
+## Funcionalidades
+
+### Sección de Home
+
+- La página de inicio muestra una imagen del hotel y el título: Reserva tu estadía en el último hotel de Cancún.
+- Incluye un botón que redirige al usuario a la sección de disponibilidad.
+
+### Sección de Disponibilidad
+
+- Muestra una lista de habitaciones disponibles en tarjetas proporcionadas por Angular Material. Cada tarjeta muestra:
+    * Nombre de la habitación
+    * Número de personas que pueden ocuparla
+    * Descripción
+    * Disponibilidad
+- También incluye un formulario reactivo para realizar una nueva reserva y registrar o validar si el usuario esta registrado.
+
+## Sección de Mis Reservas
+- Permite a los usuarios consultar sus reservas utilizando su número de documento.
+- Si el usuario está registrado, se muestran sus datos de usuario y una tabla con todas sus reservas en la cual puede Cancelar o Modificar su reservación, usando tablas de Angular Material para mostrar la información de manera clara y organizada.
+
+
 
